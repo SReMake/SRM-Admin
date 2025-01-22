@@ -29,7 +29,9 @@
   - quartz
   - mq
 - 容器
-  - docker 
+  - docker
+- 远程调用
+  - GRPC 
 ## 预定功能列表
 
 ### 1. 用户认证与授权
