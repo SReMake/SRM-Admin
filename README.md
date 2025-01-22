@@ -1,5 +1,5 @@
 # JasmineAdmin
-清馨的admin框架，轻巧简单的单体admin框架。
+清馨的admin框架，轻巧简单更少依赖的单体admin框架。
 
 ## 预定的技术选型
 - Kotlin 2.0+
