@@ -3,7 +3,7 @@
 
 ## 预定的技术选型
 - Kotlin 2.0+
-- JDK 21
+- JDK 17
 - Web框架使用spring boot
 - 权限使用Casbin
 - 认证 spring security的jwt

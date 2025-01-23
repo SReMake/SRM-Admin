@@ -19,12 +19,6 @@ subprojects {
     }
 }
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
-}
-
 allprojects {
     configurations {
         compileOnly {
