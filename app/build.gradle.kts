@@ -19,6 +19,7 @@ dependencies {
     runtimeOnly(utils.jimmer.client.swagger)
     runtimeOnly(jdbcDriver.mysql)
     runtimeOnly(jdbcDriver.postgresql)
+    runtimeOnly(jdbcDriver.h2)
 
     annotationProcessor(spring.spring.boot.configuration.processor)
     annotationProcessor(apt.lombok)

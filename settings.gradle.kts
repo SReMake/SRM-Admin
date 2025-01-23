@@ -80,6 +80,7 @@ dependencyResolutionManagement {
         create("jdbcDriver") {
             library("mysql", "com.mysql", "mysql-connector-j").version("latest.release")
             library("postgresql", "org.postgresql", "postgresql").version("latest.release")
+            library("h2", "com.h2database", "h2").version("latest.release")
         }
         create("spring") {
             library(
@@ -106,3 +107,4 @@ include("repository")
 include("user")
 include("system")
 include("app")
+include("scheduler")
