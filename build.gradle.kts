@@ -1,8 +1,9 @@
 plugins {
     java
-    alias(plugins.plugins.spring.boot)
+    alias(plugins.plugins.spring.springframework.boot)
     alias(plugins.plugins.spring.dependency.management)
 }
+
 
 group = "com.langbiantianya"
 version = "0.0.1-SNAPSHOT"
@@ -19,15 +20,16 @@ configurations {
     }
 }
 
-repositories {
-    mavenCentral()
-}
 
 dependencies {
+    implementation(starter.jimmer.spring.boot.starter)
+    annotationProcessor(apt.jimmer)
+    runtimeOnly(utils.jimmer.client.swagger)
     implementation(starter.spring.boot.starter.data.redis)
     implementation(starter.spring.boot.starter.quartz)
     implementation(starter.spring.boot.starter.security)
     implementation(starter.spring.boot.starter.web)
+    implementation(utils.hutool.all)
     compileOnly(apt.lombok)
     developmentOnly(development.spring.boot.devtools)
     runtimeOnly(jdbcDriver.mysql)
