@@ -4,35 +4,29 @@
 ## 预定的技术选型
 - Kotlin 2.0+
 - JDK 21
-- Web框架使用Ktor
+- Web框架使用spring boot
 - 权限使用Casbin
-- [ ] 待定Graphql
-- 认证jwt
+- 认证 spring security的jwt
 - orm 待定
-  - [ ] Jimmer
-  - [ ] Exposed
+  - Jimmer
 - 缓存
   - Redis
 - 对象存储 插件方式提供
   - 阿里oss
   - 腾讯cos
   - 华为obs
-  - aws s3
 - [ ] 文件系统
   - [ ] nfs
   - [ ] webdev
 - 消息队列
-  - RabbitMQ
-  - [ ] nats 待定
-  - [ ] kafka 待定
+  - [ ] RabbitMQ 可选
 - 任务调度
   - quartz
-  - mq
+  - [ ] mq
 - 容器
   - docker
 - 远程调用
   - GRPC 
-- DI koin
 ## 预定功能列表
 
 ### 1. 用户认证与授权
