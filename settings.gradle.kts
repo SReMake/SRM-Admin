@@ -39,46 +39,40 @@ gradle.beforeSettings {
 dependencyResolutionManagement {
     val springBootVersion = "3.4.1"
     val springSecurityVersion = "6.4.2"
-    val jimmerVersion = "0.9.47"
+    val jimmerVersion = "0.9.48"
     versionCatalogs {
         create("plugins") {
             plugin("spring-springframework-boot", "org.springframework.boot").version(springBootVersion)
-//            plugin("spring-dependency-management", "io.spring.dependency-management").version("1.1.6")
             plugin("spring-dependency-management", "io.spring.dependency-management").version("latest.release")
         }
         create("development") {
-            version("spring", springBootVersion)
-            library("spring-boot-devtools", "org.springframework.boot", "spring-boot-devtools").versionRef("spring")
+            library("spring-boot-devtools", "org.springframework.boot", "spring-boot-devtools").version(springBootVersion)
         }
         create("test") {
-            version("spring-boot", springBootVersion)
-            version("spring-security", springSecurityVersion)
-
             library(
                 "spring-boot-starter-test", "org.springframework.boot", "spring-boot-starter-test"
-            ).versionRef("spring-boot")
+            ).version(springBootVersion)
             library(
                 "spring-security-test", "org.springframework.security", "spring-security-test"
-            ).versionRef("spring-security")
+            ).version(springSecurityVersion)
             library(
                 "junit-platform-launcher", "org.junit.platform", "junit-platform-launcher"
             ).version("latest.release")
 
         }
         create("starter") {
-            version("spring-boot", springBootVersion)
             library(
                 "spring-boot-starter-data-redis", "org.springframework.boot", "spring-boot-starter-data-redis"
-            ).versionRef("spring-boot")
+            ).version(springBootVersion)
             library(
                 "spring-boot-starter-quartz", "org.springframework.boot", "spring-boot-starter-quartz"
-            ).versionRef("spring-boot")
+            ).version(springBootVersion)
             library(
                 "spring-boot-starter-security", "org.springframework.boot", "spring-boot-starter-security"
-            ).versionRef("spring-boot")
+            ).version(springBootVersion)
             library(
                 "spring-boot-starter-web", "org.springframework.boot", "spring-boot-starter-web"
-            ).versionRef("spring-boot")
+            ).version(springBootVersion)
             library("jimmer-spring-boot-starter", "org.babyfish.jimmer", "jimmer-spring-boot-starter").version(
                 jimmerVersion
             )
@@ -88,10 +82,9 @@ dependencyResolutionManagement {
             library("postgresql", "org.postgresql", "postgresql").version("latest.release")
         }
         create("spring") {
-            version("spring-boot", springBootVersion)
             library(
                 "spring-boot-configuration-processor", "org.springframework.boot", "spring-boot-configuration-processor"
-            ).versionRef("spring-boot")
+            ).version(springBootVersion)
         }
         create("apt") {
             library("lombok", "org.projectlombok", "lombok").version("latest.release")
@@ -101,5 +94,15 @@ dependencyResolutionManagement {
             library("jimmer-client-swagger", "org.babyfish.jimmer", "jimmer-client-swagger").version(jimmerVersion)
             library("hutool-all", "cn.hutool", "hutool-all").version("5.8.16")
         }
+        create("oss") {
+        }
+        create("jimmer") {
+            library("sql", "org.babyfish.jimmer", "jimmer-sql").version(jimmerVersion)
+        }
     }
 }
+include("model")
+include("repository")
+include("user")
+include("system")
+include("app")

@@ -1,4 +1,4 @@
-package com.langbiantianya.jasmineadmin;
+package com.langbiantianya;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
