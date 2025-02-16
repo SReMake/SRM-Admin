@@ -1,5 +1,6 @@
 package com.rerubbish.repository.system;
 
+import com.rerubbish.model.system.ResourcePermission;
 import org.babyfish.jimmer.spring.repo.support.AbstractJavaRepository;
 import org.babyfish.jimmer.sql.JSqlClient;
 import org.springframework.stereotype.Repository;
