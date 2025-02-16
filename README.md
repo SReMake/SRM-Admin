@@ -1,8 +1,7 @@
-# JasmineAdmin
-清馨的admin框架，轻巧、简单、更少的魔法、更少的内存、更少依赖、升级迁移容易的现代化单体admin框架。
+# RB-Admin
+清馨的admin框架，轻巧、简单、更少的魔法、更少依赖、升级迁移容易的现代化admin框架后端。
 
 ## 预定的技术选型
-- Kotlin 2.0+
 - JDK 17
 - Web框架使用spring boot
 - 权限使用Casbin

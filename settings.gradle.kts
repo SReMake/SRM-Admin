@@ -1,4 +1,4 @@
-rootProject.name = "Jasmine-admin"
+rootProject.name = "RB-admin"
 
 
 val urlMaps = mapOf(
@@ -46,7 +46,9 @@ dependencyResolutionManagement {
             plugin("spring-dependency-management", "io.spring.dependency-management").version("latest.release")
         }
         create("development") {
-            library("spring-boot-devtools", "org.springframework.boot", "spring-boot-devtools").version(springBootVersion)
+            library("spring-boot-devtools", "org.springframework.boot", "spring-boot-devtools").version(
+                springBootVersion
+            )
         }
         create("test") {
             library(

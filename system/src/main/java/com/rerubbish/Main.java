@@ -1,4 +1,4 @@
-package com.langbiantianya;
+package com.rerubbish;
 
 public class Main {
     public static void main(String[] args) {

@@ -1,14 +1,13 @@
-package com.langbiantianya.user;
+package com.rerubbish.user;
 
-import org.babyfish.jimmer.sql.*;
+import com.rerubbish.BasicEntity;
+import org.babyfish.jimmer.sql.Entity;
+import org.babyfish.jimmer.sql.OneToMany;
 
 import java.util.List;
 
 @Entity
-public interface User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    long id();
+public interface User extends BasicEntity {
 
     String username();
 

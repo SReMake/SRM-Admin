@@ -1,4 +1,4 @@
-package com.langbiantianya.user;
+package com.rerubbish.user;
 
 public enum UserStatus {
     /**正常*/
