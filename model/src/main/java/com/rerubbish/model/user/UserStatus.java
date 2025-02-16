@@ -1,4 +1,4 @@
-package com.rerubbish.user;
+package com.rerubbish.model.user;
 
 public enum UserStatus {
     /**正常*/

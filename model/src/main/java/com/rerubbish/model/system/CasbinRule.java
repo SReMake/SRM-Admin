@@ -1,6 +1,6 @@
-package com.rerubbish.system;
+package com.rerubbish.model.system;
 
-import com.rerubbish.BasicEntity;
+import com.rerubbish.model.BasicEntity;
 import org.babyfish.jimmer.sql.Entity;
 
 

@@ -1,4 +1,4 @@
-package com.rerubbish;
+package com.rerubbish.system;
 
 public class Main {
     public static void main(String[] args) {

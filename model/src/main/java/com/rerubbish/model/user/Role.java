@@ -1,6 +1,6 @@
-package com.rerubbish.user;
+package com.rerubbish.model.user;
 
-import com.rerubbish.BasicEntity;
+import com.rerubbish.model.BasicEntity;
 import org.babyfish.jimmer.sql.Entity;
 import org.babyfish.jimmer.sql.ManyToOne;
 

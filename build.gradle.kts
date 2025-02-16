@@ -1,8 +1,6 @@
 plugins {
     java
     id("java-library")
-//    alias(plugins.plugins.spring.springframework.boot)
-//    alias(plugins.plugins.spring.dependency.management)
 }
 
 

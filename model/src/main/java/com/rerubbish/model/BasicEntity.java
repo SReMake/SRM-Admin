@@ -1,6 +1,6 @@
-package com.rerubbish;
+package com.rerubbish.model;
 
-import com.rerubbish.user.User;
+import com.rerubbish.model.user.User;
 import org.babyfish.jimmer.sql.GeneratedValue;
 import org.babyfish.jimmer.sql.GenerationType;
 import org.babyfish.jimmer.sql.Id;
