@@ -1,0 +1,38 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: 123456
+jimmer:
+  offset-optimizing-threshold: 10
+  id-only-target-checking-level: ALL
+  database-validation-mode: ERROR
+  show-sql: true
+  pretty-sql: true
+
+  # You can enable the following configuration line `inline-sql-variables: true`,
+  # restart the application and call some REST APIs again to see what happens
+  # inline-sql-variables: true
+
+  executor-context-prefixes:
+    - org.babyfish.jimmer.sql.example.business
+  client:
+    ts:
+      path: /ts.zip
+    openapi:
+      path: /openapi.yml
+      ui-path: /openapi.html
+      properties:
+        info:
+          title: Jimmer REST Example(Java)
+          description: This is the OpenAPI UI of Jimmer REST Example(Java)
+          version: 0.8.62
+        securities:
+          - tenantHeader: [ ]
+        components:
+          securitySchemes:
+            tenantHeader:
+              type: apiKey
+              name: tenant
+              in: HEADER

@@ -4,7 +4,7 @@ plugins {
 }
 
 
-group = "com.rerubbish"
+group = "com.SReMake"
 version = "0.0.1-SNAPSHOT"
 
 subprojects {

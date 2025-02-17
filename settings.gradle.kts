@@ -1,4 +1,4 @@
-rootProject.name = "RB-admin"
+rootProject.name = "SRM-Admin"
 
 
 val urlMaps = mapOf(
@@ -110,3 +110,4 @@ include("user")
 include("system")
 include("app")
 include("scheduler")
+include("common")

@@ -3,13 +3,14 @@ plugins {
     alias(plugins.plugins.spring.dependency.management)
 }
 
-group = "com.rerubbish"
+group = "com.SReMake"
 version = "0.0.1-SNAPSHOT"
 
 
 
 dependencies {
     implementation(project(":user"))
+    implementation(project(":system"))
 
     implementation(starter.spring.boot.starter.web)
     implementation(starter.jimmer.spring.boot.starter)
