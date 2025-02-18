@@ -39,7 +39,7 @@ gradle.beforeSettings {
 dependencyResolutionManagement {
     val springBootVersion = "3.4.1"
     val springSecurityVersion = "6.4.2"
-    val jimmerVersion = "0.9.48"
+    val jimmerVersion = "0.9.55"
     versionCatalogs {
         create("plugins") {
             plugin("spring-springframework-boot", "org.springframework.boot").version(springBootVersion)
