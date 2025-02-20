@@ -1,11 +1,11 @@
-package com.SReMake.user;
+package com.SReMake.user.controller;
 
-import org.springframework.transaction.annotation.Transactional;
+import org.babyfish.jimmer.client.EnableImplicitApi;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/auth")
-@Transactional
-public class AuthService {
+@EnableImplicitApi
+public class AuthController {
 }

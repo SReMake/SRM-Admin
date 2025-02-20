@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @EnableDtoGeneration
 @EnableImplicitApi
-public class Application {
+public class UserApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(UserApplication.class, args);

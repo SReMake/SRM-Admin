@@ -6,11 +6,13 @@ import org.jetbrains.annotations.Nullable;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "\"user\"")
+@Table(name = "srm_user")
 public interface User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id();
+
+    String salt();
 
     LocalDateTime createAt();
 

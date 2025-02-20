@@ -1,0 +1,31 @@
+export com.SReMake.model.user.User
+
+import java.time.LocalDateTime
+
+input UserInput {
+    username
+
+    password
+
+    phone
+
+    salt?
+}
+
+input UserSearchInput {
+    id?
+
+    username?
+
+    phone
+
+    status?
+
+    createAtStart :LocalDateTime?
+
+    updateAtStart :LocalDateTime?
+
+    createAtEnd :LocalDateTime?
+
+    updateAtEnd :LocalDateTime?
+}

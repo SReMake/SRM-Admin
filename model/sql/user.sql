@@ -1,6 +1,7 @@
-create table "user"
+create table "srm_user"
 (
     id           bigserial primary key,
+    salt         char(16)                                         not null,
     username     varchar(64)                                      not null,
     password     varchar(256)                                     not null,
     phone        varchar(16),
@@ -10,9 +11,9 @@ create table "user"
     update_at    timestamp,
     create_by_id bigint
         constraint user_user_id_create_by_id
-            references "user",
+            references "srm_user",
     update_by_id bigint
         constraint user_user_id_update_by_id
-            references "user"
+            references "srm_user"
 );
 

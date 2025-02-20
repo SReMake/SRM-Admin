@@ -8,5 +8,6 @@ dependencies {
     implementation(starter.spring.boot.starter.web)
     implementation(starter.jimmer.spring.boot.starter)
     runtimeOnly(utils.jimmer.client.swagger)
-    annotationProcessor(apt.jimmer)
+    annotationProcessor(apt.lombok)
+    compileOnly(apt.lombok)
 }

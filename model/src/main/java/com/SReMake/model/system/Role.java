@@ -7,7 +7,7 @@ import org.jetbrains.annotations.Nullable;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "role")
+@Table(name = "srm_role")
 public interface Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

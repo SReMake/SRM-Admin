@@ -1,14 +1,14 @@
 package com.SReMake.repository.user;
 
-
 import com.SReMake.model.user.User;
-import org.babyfish.jimmer.spring.repo.support.AbstractJavaRepository;
-import org.babyfish.jimmer.sql.JSqlClient;
-import org.springframework.stereotype.Repository;
+import com.SReMake.model.user.dto.UserSearchInput;
+import org.babyfish.jimmer.Page;
+import org.babyfish.jimmer.spring.repo.JavaRepository;
+import org.babyfish.jimmer.spring.repo.PageParam;
 
-@Repository
-public class UserRepository extends AbstractJavaRepository<User, Long> {
-    public UserRepository(JSqlClient sql) {
-        super(sql);
-    }
+public interface UserRepository extends JavaRepository<User, Long> {
+    /**
+     * 分页查询
+     */
+    Page<User> findPage(PageParam pageParam, UserSearchInput params);
 }

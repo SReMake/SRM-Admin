@@ -7,6 +7,5 @@ dependencies {
 
     annotationProcessor(apt.jimmer)
     annotationProcessor(apt.lombok)
-
     compileOnly(apt.lombok)
 }

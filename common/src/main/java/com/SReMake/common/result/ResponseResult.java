@@ -8,10 +8,6 @@ public class ResponseResult<T> {
     private String message;
     private T data;
 
-    // 无参构造函数
-    public ResponseResult() {
-    }
-
     // 带参数的构造函数
     public ResponseResult(int code, String message, T data) {
         this.code = code;
