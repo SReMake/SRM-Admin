@@ -6,7 +6,7 @@ create table "srm_user"
     password     varchar(256)                                     not null,
     phone        varchar(16),
     avatar       varchar(256),
-    status       varchar(25) default 'CREATED'::character varying not null,
+    status       varchar(25) default 'NORMAL'::character varying not null,
     create_at    timestamp   default now()                        not null,
     update_at    timestamp,
     create_by_id bigint

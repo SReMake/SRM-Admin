@@ -2,7 +2,11 @@ package com.SReMake.user.service.impl;
 
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.digest.DigestUtil;
+import com.SReMake.common.exception.can.ValidationException;
 import com.SReMake.model.user.User;
+import com.SReMake.model.user.UserDraft;
+import com.SReMake.model.user.UserStatus;
+import com.SReMake.model.user.dto.UpdateUserInput;
 import com.SReMake.model.user.dto.UserInput;
 import com.SReMake.model.user.dto.UserSearchInput;
 import com.SReMake.repository.user.UserRepository;
@@ -13,6 +17,8 @@ import org.babyfish.jimmer.Page;
 import org.babyfish.jimmer.spring.repo.PageParam;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Objects;
 
 @Service
 @Transactional
@@ -37,5 +43,37 @@ public class UserServiceImpl implements UserService {
     public Page<UserVo> listUser(PageParam pageParam, UserSearchInput params) {
         Page<User> result = userRepository.findPage(pageParam, params);
         return new Page<>(result.getRows().stream().map(UserVo::new).toList(), result.getTotalRowCount(), result.getTotalPageCount());
+    }
+
+    @Override
+    public void updateUser(long id, UpdateUserInput user) {
+        userRepository.update(UserDraft.$.produce(draft -> {
+            draft.setId(id);
+            if (!Objects.isNull(user.getUsername())) {
+                draft.setUsername(user.getUsername());
+            }
+            if (!Objects.isNull(user.getPhone())) {
+                draft.setPhone(user.getPhone());
+            }
+            if (!Objects.isNull(user.getAvatar())) {
+                draft.setAvatar(user.getAvatar());
+            }
+        }));
+    }
+
+    @Override
+    public void disableUser(long id) {
+        userRepository.update(UserDraft.$.produce(draft -> {
+            draft.setId(id);
+            draft.setStatus(UserStatus.DISABLE);
+        }));
+    }
+
+    @Override
+    public void enableUser(long id) {
+        userRepository.update(UserDraft.$.produce(draft -> {
+            draft.setId(id);
+            draft.setStatus(UserStatus.NORMAL);
+        }));
     }
 }

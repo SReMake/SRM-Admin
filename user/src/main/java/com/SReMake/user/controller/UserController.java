@@ -1,8 +1,9 @@
 package com.SReMake.user.controller;
 
+import com.SReMake.common.exception.can.ValidationException;
 import com.SReMake.common.result.ResponseResult;
 import com.SReMake.common.result.ResponseResultPage;
-import com.SReMake.model.user.User;
+import com.SReMake.model.user.dto.UpdateUserInput;
 import com.SReMake.model.user.dto.UserInput;
 import com.SReMake.model.user.dto.UserSearchInput;
 import com.SReMake.user.service.UserService;
@@ -10,6 +11,8 @@ import com.SReMake.user.vo.UserVo;
 import org.babyfish.jimmer.client.EnableImplicitApi;
 import org.babyfish.jimmer.spring.repo.PageParam;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -44,9 +47,24 @@ public class UserController {
     /**
      * 更新用户信息
      */
-    @PutMapping("")
-    public ResponseResult<User> updateUser(@RequestBody UserInput user) {
-        throw new RuntimeException("Not Implemented");
+    @PutMapping("/{id}")
+    public ResponseResult<String> updateUser(@PathVariable long id, @RequestBody UpdateUserInput user) {
+        userService.updateUser(id, user);
+        return ResponseResult.success("OK");
+    }
 
+    /**
+     * 禁用账户
+     */
+    @DeleteMapping("/{id}")
+    public ResponseResult<String> disableUser(@PathVariable long id) {
+        userService.disableUser(id);
+        return ResponseResult.success("OK");
+    }
+    /**启用账户*/
+    @PutMapping("/{id}/enable")
+    public ResponseResult<String> enableUser(@PathVariable long id) {
+        userService.enableUser(id);
+        return ResponseResult.success("OK");
     }
 }

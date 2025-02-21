@@ -12,6 +12,14 @@ input UserInput {
     salt?
 }
 
+input UpdateUserInput {
+    username?
+
+    phone
+
+    avatar
+}
+
 input UserSearchInput {
     id?
 
