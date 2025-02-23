@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Table(name = "srm_role")
 public interface Role {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     long id();
 
     LocalDateTime createAt();

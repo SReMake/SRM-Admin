@@ -1,0 +1,21 @@
+export com.SReMake.model.system.Role
+
+import java.time.LocalDateTime
+
+input UpdateRoleInput{
+    name?
+}
+
+input RoleSearchInput {
+    id?
+
+    name?
+
+    createAtStart :LocalDateTime?
+
+    updateAtStart :LocalDateTime?
+
+    createAtEnd :LocalDateTime?
+
+    updateAtEnd :LocalDateTime?
+}

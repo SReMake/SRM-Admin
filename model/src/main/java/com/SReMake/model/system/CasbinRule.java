@@ -2,37 +2,35 @@ package com.SReMake.model.system;
 
 import com.SReMake.model.user.User;
 import org.babyfish.jimmer.sql.*;
+import org.jetbrains.annotations.Nullable;
 
 import java.time.LocalDateTime;
 
-//@Entity
-//public interface CasbinRule {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    long id();
-//
-//    LocalDateTime createAt();
-//
-//    LocalDateTime updateAt();
-//
-//    @OneToOne
-//    User createBy();
-//
-//    @OneToOne
-//    User updateBy();
-//
-//    String ptype();
-//
-//    String v0();
-//
-//    String v1();
-//
-//    String v2();
-//
-//    String v3();
-//
-//    String v4();
-//
-//    String v5();
-//
-//}
+@Entity
+@Table(name = "casbin_rule")
+public interface CasbinRule {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    int id();
+
+    String ptype();
+
+    @Nullable
+    String v0();
+
+    @Nullable
+    String v1();
+
+    @Nullable
+    String v2();
+
+    @Nullable
+    String v3();
+
+    @Nullable
+    String v4();
+
+    @Nullable
+    String v5();
+
+}

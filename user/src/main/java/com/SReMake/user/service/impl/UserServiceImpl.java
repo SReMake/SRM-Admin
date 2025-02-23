@@ -2,10 +2,8 @@ package com.SReMake.user.service.impl;
 
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.digest.DigestUtil;
-import com.SReMake.common.exception.can.ValidationException;
 import com.SReMake.model.user.User;
 import com.SReMake.model.user.UserDraft;
-import com.SReMake.model.user.UserStatus;
 import com.SReMake.model.user.dto.UpdateUserInput;
 import com.SReMake.model.user.dto.UserInput;
 import com.SReMake.model.user.dto.UserSearchInput;
@@ -65,7 +63,7 @@ public class UserServiceImpl implements UserService {
     public void disableUser(long id) {
         userRepository.update(UserDraft.$.produce(draft -> {
             draft.setId(id);
-            draft.setStatus(UserStatus.DISABLE);
+            draft.setStatus(User.Status.DISABLE);
         }));
     }
 
@@ -73,7 +71,7 @@ public class UserServiceImpl implements UserService {
     public void enableUser(long id) {
         userRepository.update(UserDraft.$.produce(draft -> {
             draft.setId(id);
-            draft.setStatus(UserStatus.NORMAL);
+            draft.setStatus(User.Status.NORMAL);
         }));
     }
 }

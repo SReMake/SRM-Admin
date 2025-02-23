@@ -1,13 +1,16 @@
 package com.SReMake.repository.system;
 
 import com.SReMake.model.system.Role;
-import org.babyfish.jimmer.spring.repo.support.AbstractJavaRepository;
-import org.babyfish.jimmer.sql.JSqlClient;
-import org.springframework.stereotype.Repository;
+import com.SReMake.model.system.dto.RoleSearchInput;
+import org.babyfish.jimmer.Page;
+import org.babyfish.jimmer.spring.repo.JavaRepository;
+import org.babyfish.jimmer.spring.repo.PageParam;
 
-@Repository
-public class RoleRepository extends AbstractJavaRepository<Role, Long> {
-    public RoleRepository(JSqlClient sql) {
-        super(sql);
-    }
+public interface RoleRepository extends JavaRepository<Role, Long> {
+    /**
+     * 分页查询
+     */
+    Page<Role> findPage(PageParam pageParam, RoleSearchInput params);
+
+
 }

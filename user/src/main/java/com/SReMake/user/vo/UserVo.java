@@ -1,7 +1,6 @@
 package com.SReMake.user.vo;
 
 import com.SReMake.model.user.User;
-import com.SReMake.model.user.UserStatus;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -12,7 +11,7 @@ public class UserVo {
     private String username;
     private String phone;
     private String avatar;
-    private UserStatus status;
+    private User.Status status;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
     private User createBy;

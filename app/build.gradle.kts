@@ -10,6 +10,7 @@ version = "0.0.1-SNAPSHOT"
 
 dependencies {
     implementation(project(":common"))
+    implementation(project(":security"))
     implementation(project(":user"))
     implementation(project(":system"))
 
@@ -19,6 +20,7 @@ dependencies {
     implementation(starter.spring.boot.starter.quartz)
 //    implementation(starter.spring.boot.starter.security)
     implementation(utils.hutool.all)
+
 
     runtimeOnly(utils.jimmer.client.swagger)
     runtimeOnly(jdbcDriver.mysql)

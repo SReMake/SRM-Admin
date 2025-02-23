@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Table(name = "srm_user")
 public interface User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     long id();
 
     String salt();
@@ -29,7 +29,7 @@ public interface User {
     @Nullable
     String avatar();
 
-    UserStatus status();
+    Status status();
 
     @Nullable
     @OneToOne
@@ -38,5 +38,16 @@ public interface User {
     @Nullable
     @OneToOne
     User updateBy();
+
+    public enum Status {
+        /**
+         * 正常
+         */
+        NORMAL,
+        /**
+         * 注销
+         */
+        DISABLE
+    }
 }
 

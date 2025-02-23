@@ -78,6 +78,8 @@ dependencyResolutionManagement {
             library("jimmer-spring-boot-starter", "org.babyfish.jimmer", "jimmer-spring-boot-starter").version(
                 jimmerVersion
             )
+            library("spring-boot-starter-data-jdbc","org.springframework.boot","spring-boot-starter-data-jdbc").version(springBootVersion)
+
         }
         create("jdbcDriver") {
             library("mysql", "com.mysql", "mysql-connector-j").version("latest.release")
@@ -96,6 +98,12 @@ dependencyResolutionManagement {
         create("utils") {
             library("jimmer-client-swagger", "org.babyfish.jimmer", "jimmer-client-swagger").version(jimmerVersion)
             library("hutool-all", "cn.hutool", "hutool-all").version("5.8.16")
+            library("jjwt-api", "io.jsonwebtoken", "jjwt-api").version("0.12.6")
+
+        }
+        create("casbin"){
+            library("jcasbin","org.casbin","jcasbin").version("1.79.0")
+            library("jdbc-adapter","org.casbin","jdbc-adapter").version("2.10.0")
         }
         create("oss") {
         }
@@ -111,3 +119,4 @@ include("system")
 include("app")
 include("scheduler")
 include("common")
+include("security")

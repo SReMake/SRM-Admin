@@ -1,6 +1,5 @@
 package com.SReMake.user.controller;
 
-import com.SReMake.common.exception.can.ValidationException;
 import com.SReMake.common.result.ResponseResult;
 import com.SReMake.common.result.ResponseResultPage;
 import com.SReMake.model.user.dto.UpdateUserInput;
@@ -11,8 +10,6 @@ import com.SReMake.user.vo.UserVo;
 import org.babyfish.jimmer.client.EnableImplicitApi;
 import org.babyfish.jimmer.spring.repo.PageParam;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/v1/user")
