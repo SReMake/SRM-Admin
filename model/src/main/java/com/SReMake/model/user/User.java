@@ -45,7 +45,7 @@ public interface User {
          */
         NORMAL,
         /**
-         * 注销
+         * 停用
          */
         DISABLE
     }

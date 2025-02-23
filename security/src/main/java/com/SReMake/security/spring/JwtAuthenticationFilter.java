@@ -1,5 +1,7 @@
 package com.SReMake.security.spring;
 
+import cn.hutool.jwt.JWT;
+import cn.hutool.jwt.JWTUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 
 @Slf4j
@@ -21,8 +24,8 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private  final JwtUtilities jwtUtilities ;
-    private final CustomerUserDetailsService customerUserDetailsService ;
+    private final CustomerUserDetailsService customerUserDetailsService;
+    private final JwtConfig jwtConfig;
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
@@ -30,22 +33,37 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     @NonNull FilterChain filterChain)
             throws ServletException, IOException {
 
-        String token = jwtUtilities.getToken(request) ;
 
-        if (token!=null && jwtUtilities.validateToken(token))
-        {
-            String email = jwtUtilities.extractUsername(token);
+        String token = extractTokenFromRequest(request);
 
-            UserDetails userDetails = customerUserDetailsService.loadUserByUsername(email);
+        if (token != null && validateToken(token)) {
+            String username = extractUsernameFromToken(token);
+
+            UserDetails userDetails = customerUserDetailsService.loadUserByUsername(username);
             if (userDetails != null) {
                 UsernamePasswordAuthenticationToken authentication =
-                        new UsernamePasswordAuthenticationToken(userDetails.getUsername() ,null , userDetails.getAuthorities());
-                log.info("authenticated user with email :{}", email);
+                        new UsernamePasswordAuthenticationToken(userDetails.getUsername(), null, userDetails.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
 
             }
         }
-        filterChain.doFilter(request,response);
+        filterChain.doFilter(request, response);
     }
 
+    private String extractTokenFromRequest(HttpServletRequest request) {
+        String authorizationHeader = request.getHeader("Authorization");
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            return authorizationHeader.substring(7);
+        }
+        return null;
+    }
+
+    private boolean validateToken(String token) {
+        return JWTUtil.verify(token, jwtConfig.getSecretKey().getBytes(StandardCharsets.UTF_8));
+    }
+
+    private String extractUsernameFromToken(String token) {
+        JWT jwt = JWTUtil.parseToken(token);
+        return (String) jwt.getPayload("username"); //JWT 负载中包含 "username" 字段
+    }
 }

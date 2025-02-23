@@ -1,13 +1,12 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/postgres
+    url: jdbc:postgresql://192.168.100.155:5433/postgres
     username: postgres
     password: 123456
 jwt:
   secret-key: your_key # jwt签名加密秘钥
   ttl: 7200000 # jwt过期时间
-  token-name: Authorization # 前端传递过来的令牌名称
 jimmer:
   offset-optimizing-threshold: 10
   id-only-target-checking-level: ALL

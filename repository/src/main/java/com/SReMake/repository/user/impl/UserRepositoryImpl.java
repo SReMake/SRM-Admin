@@ -37,4 +37,13 @@ public class UserRepositoryImpl extends AbstractJavaRepository<User, Long> imple
                 .select(Tables.USER_TABLE)
                 .fetchPage(pageParam.getIndex(), pageParam.getSize());
     }
+
+    @Override
+    public User findByUsername(String username) {
+        return this.sql.createQuery(Tables.USER_TABLE).where(
+                        Tables.USER_TABLE.username().eq(username),
+                        Tables.USER_TABLE.status().eq(User.Status.NORMAL)
+                ).select(Tables.USER_TABLE)
+                .fetchOne();
+    }
 }
