@@ -6,6 +6,7 @@ import lombok.SneakyThrows;
 import org.casbin.adapter.JDBCAdapter;
 import org.casbin.jcasbin.main.Enforcer;
 import org.casbin.jcasbin.model.Model;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 

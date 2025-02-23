@@ -21,11 +21,15 @@ import java.nio.charset.StandardCharsets;
 
 @Slf4j
 @Component
-@RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final CustomerUserDetailsService customerUserDetailsService;
     private final JwtConfig jwtConfig;
+
+    public JwtAuthenticationFilter(CustomerUserDetailsService customerUserDetailsService, JwtConfig jwtConfig) {
+        this.customerUserDetailsService = customerUserDetailsService;
+        this.jwtConfig = jwtConfig;
+    }
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
