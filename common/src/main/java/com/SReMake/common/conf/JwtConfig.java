@@ -1,4 +1,4 @@
-package com.SReMake.security.spring;
+package com.SReMake.common.conf;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "jwt")
 public class JwtConfig {
     private String secretKey;
-    private long ttl;
+    private long expireTime;
 
 }

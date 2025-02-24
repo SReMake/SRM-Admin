@@ -12,8 +12,6 @@ public interface User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id();
 
-    String salt();
-
     LocalDateTime createAt();
 
     @Nullable
@@ -25,6 +23,9 @@ public interface User {
 
     @Nullable
     String phone();
+
+    @Nullable
+    String email();
 
     @Nullable
     String avatar();

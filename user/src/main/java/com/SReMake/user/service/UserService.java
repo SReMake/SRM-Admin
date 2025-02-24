@@ -29,6 +29,9 @@ public interface UserService {
      * 禁用账户
      */
     void disableUser(long id);
-    /**启用账户*/
+
+    /**
+     * 启用账户
+     */
     void enableUser(long id);
 }

@@ -1,10 +1,10 @@
 create table "srm_user"
 (
     id           bigserial primary key,
-    salt         char(16)                                        not null,
     username     varchar(64) unique                              not null,
     password     varchar(256)                                    not null,
     phone        varchar(16),
+    email        varchar(64),
     avatar       varchar(256),
     status       varchar(25) default 'NORMAL'::character varying not null,
     create_at    timestamp   default now()                       not null,

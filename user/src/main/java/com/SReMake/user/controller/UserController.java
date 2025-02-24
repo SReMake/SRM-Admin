@@ -58,7 +58,10 @@ public class UserController {
         userService.disableUser(id);
         return ResponseResult.success("OK");
     }
-    /**启用账户*/
+
+    /**
+     * 启用账户
+     */
     @PutMapping("/{id}/enable")
     public ResponseResult<String> enableUser(@PathVariable long id) {
         userService.enableUser(id);

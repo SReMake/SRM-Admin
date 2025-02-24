@@ -8,14 +8,14 @@ input UserInput {
     password
 
     phone
-
-    salt?
 }
 
 input UpdateUserInput {
     username?
 
     phone
+
+    email
 
     avatar
 }
@@ -40,6 +40,8 @@ input UserSearchInput {
 
 input UserLoginInput {
     username
+
     password
+
     captcha : String
 }

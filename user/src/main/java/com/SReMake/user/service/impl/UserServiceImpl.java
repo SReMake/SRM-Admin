@@ -1,6 +1,7 @@
 package com.SReMake.user.service.impl;
 
 import cn.hutool.core.util.RandomUtil;
+import cn.hutool.crypto.digest.BCrypt;
 import cn.hutool.crypto.digest.DigestUtil;
 import com.SReMake.model.user.User;
 import com.SReMake.model.user.UserDraft;
@@ -29,11 +30,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUser(UserInput user) {
-        String salt = RandomUtil.randomString(16);
-        user.setSalt(salt);
-        // 对密码进行加盐后哈希处理
-        String hashedPassword = DigestUtil.md5Hex(user.getPassword() + salt);
-        user.setPassword(hashedPassword);
+        String BcryptPassword = BCrypt.hashpw(user.getPassword());
+        user.setPassword(BcryptPassword);
         userRepository.insert(user);
     }
 
@@ -49,6 +47,9 @@ public class UserServiceImpl implements UserService {
             draft.setId(id);
             if (!Objects.isNull(user.getUsername())) {
                 draft.setUsername(user.getUsername());
+            }
+            if (!Objects.isNull(user.getEmail())) {
+                draft.setEmail(user.getEmail());
             }
             if (!Objects.isNull(user.getPhone())) {
                 draft.setPhone(user.getPhone());
