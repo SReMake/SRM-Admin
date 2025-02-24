@@ -37,3 +37,9 @@ input UserSearchInput {
 
     updateAtEnd :LocalDateTime?
 }
+
+input UserLoginInput {
+    username
+    password
+    captcha : String
+}

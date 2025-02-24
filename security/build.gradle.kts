@@ -4,7 +4,6 @@ version = "0.0.1-SNAPSHOT"
 dependencies {
     implementation(project(":common"))
     implementation(project(":repository"))
-    implementation(utils.jjwt.api)
     implementation(utils.hutool.all)
     implementation(starter.spring.boot.starter.web)
     implementation(starter.spring.boot.starter.security)
