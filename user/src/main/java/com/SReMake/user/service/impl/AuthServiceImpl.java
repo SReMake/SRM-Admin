@@ -5,6 +5,7 @@ import cn.hutool.captcha.ShearCaptcha;
 import cn.hutool.crypto.digest.BCrypt;
 import cn.hutool.jwt.JWTUtil;
 import com.SReMake.common.conf.JwtConfig;
+import com.SReMake.common.exception.can.CaptchaValidationException;
 import com.SReMake.model.user.User;
 import com.SReMake.model.user.dto.UserLoginInput;
 import com.SReMake.repository.user.UserRepository;
@@ -42,11 +43,16 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public JwtVo login(UserLoginInput loginInput) {
+        String captcha = String.valueOf(redisTemplate.opsForValue().getAndDelete(RedisToken.AUTH_CAPTCHA.Generate(loginInput.getCaptchaId())));
+        if (!captcha.equals(loginInput.getCaptcha())) {
+            throw new CaptchaValidationException("wrong captcha!");
+        }
+
         User user = userRepository.findByUsername(loginInput.getUsername());
         if (Objects.isNull(user)) {
             throw new UsernameNotFoundException("User not found!");
         }
-        if (BCrypt.checkpw(loginInput.getPassword(), user.password())) {
+        if (!BCrypt.checkpw(loginInput.getPassword(), user.password())) {
             throw new BadCredentialsException("wrong username or password!");
         }
 
@@ -71,7 +77,7 @@ public class AuthServiceImpl implements AuthService {
     public void logout(String token) {
         long expire = Long.parseLong(JWTUtil.parseToken(token).getPayload("expire").toString());
         if (System.currentTimeMillis() < expire) {
-            redisTemplate.opsForValue().set(RedisToken.AUTH_EXPIRE.Generate(token), 1, expire - System.currentTimeMillis() + 1000, TimeUnit.MILLISECONDS);
+            redisTemplate.opsForValue().set(RedisToken.AUTH_EXPIRE.Generate(token), "1", expire - System.currentTimeMillis() + 1000, TimeUnit.MILLISECONDS);
         }
     }
 }

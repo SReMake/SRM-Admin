@@ -44,4 +44,6 @@ input UserLoginInput {
     password
 
     captcha : String
+
+    captchaId : String
 }

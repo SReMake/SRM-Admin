@@ -7,9 +7,7 @@ import com.SReMake.user.vo.CaptchaVo;
 import com.SReMake.user.vo.JwtVo;
 import jakarta.servlet.http.HttpServletRequest;
 import org.babyfish.jimmer.client.EnableImplicitApi;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -26,14 +24,14 @@ public class AuthController {
      * 登入
      */
     @PostMapping("/login")
-    public ResponseResult<JwtVo> login(UserLoginInput user) {
+    public ResponseResult<JwtVo> login(@RequestBody UserLoginInput user) {
         return ResponseResult.success(authService.login(user));
     }
 
     /**
      * 获取验证码
      */
-    @PostMapping("/captcha")
+    @GetMapping("/captcha")
     public ResponseResult<CaptchaVo> captcha() {
         return ResponseResult.success(authService.captcha());
     }

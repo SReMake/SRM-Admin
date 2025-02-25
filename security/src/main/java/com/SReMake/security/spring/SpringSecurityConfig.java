@@ -32,8 +32,11 @@ public class SpringSecurityConfig {
         // 配置放行路径
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers(
-                        "/api/v1/auth/login"  // 放行登录接口路径
-                ).permitAll()
+                        "/api/v1/auth/login",
+                        "/api/v1/auth/captcha",
+                        "/api/v1/auth/logout"
+                )
+                .permitAll()
                 .anyRequest().authenticated()
         );
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
