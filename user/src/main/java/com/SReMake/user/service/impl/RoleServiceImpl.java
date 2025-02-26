@@ -1,11 +1,11 @@
-package com.SReMake.system.service.impl;
+package com.SReMake.user.service.impl;
 
 import com.SReMake.model.system.Role;
 import com.SReMake.model.system.RoleDraft;
 import com.SReMake.model.system.dto.RoleSearchInput;
 import com.SReMake.model.system.dto.UpdateRoleInput;
-import com.SReMake.repository.system.impl.RoleRepositoryImpl;
-import com.SReMake.system.service.RoleService;
+import com.SReMake.repository.user.impl.RoleRepositoryImpl;
+import com.SReMake.user.service.RoleService;
 import org.babyfish.jimmer.Page;
 import org.babyfish.jimmer.spring.repo.PageParam;
 import org.springframework.stereotype.Service;

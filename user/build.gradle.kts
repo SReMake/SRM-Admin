@@ -9,6 +9,7 @@ dependencies {
     implementation(starter.jimmer.spring.boot.starter)
     implementation(starter.spring.boot.starter.security)
     implementation(starter.spring.boot.starter.data.redis)
+    implementation(casbin.jcasbin)
     runtimeOnly(utils.jimmer.client.swagger)
     annotationProcessor(apt.jimmer)
     compileOnly(apt.jimmer)

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-@Getter
 public class CasbinEnforcer {
     private final Enforcer enforcer;
 
@@ -35,5 +34,10 @@ public class CasbinEnforcer {
                 [matchers]
                 m = g(r.sub, p.sub) && r.obj == p.obj && r.act == p.act""");
         enforcer = new Enforcer(model, adapter, true);
+    }
+
+    @Bean
+    public Enforcer enforcer() {
+        return enforcer;
     }
 }

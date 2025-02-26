@@ -1,9 +1,9 @@
-package com.SReMake.repository.system.impl;
+package com.SReMake.repository.user.impl;
 
 import com.SReMake.model.Tables;
 import com.SReMake.model.system.Role;
 import com.SReMake.model.system.dto.RoleSearchInput;
-import com.SReMake.repository.system.RoleRepository;
+import com.SReMake.repository.user.RoleRepository;
 import org.babyfish.jimmer.Page;
 import org.babyfish.jimmer.spring.repo.PageParam;
 import org.babyfish.jimmer.spring.repo.support.AbstractJavaRepository;

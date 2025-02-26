@@ -59,6 +59,7 @@ public class AuthServiceImpl implements AuthService {
         byte[] key = jwtConfig.getSecretKey().getBytes(StandardCharsets.UTF_8);
         long expire = System.currentTimeMillis() + jwtConfig.getExpireTime();
         Map<String, Object> payload = new HashMap<>();
+        payload.put("id", user.id());
         payload.put("expire", expire);
         payload.put("username", user.username());
         String token = JWTUtil.createToken(payload, key);

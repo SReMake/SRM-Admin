@@ -28,8 +28,6 @@ jimmer:
       ui-path: /openapi.html
       properties:
         info:
-          title: My Web Service
-          description: |
-            Restore the DTO explosion that was 
-            eliminated by server-side developers
+          title: SRM Admin
+          description: 自动生成的api文档
           version: 1.0

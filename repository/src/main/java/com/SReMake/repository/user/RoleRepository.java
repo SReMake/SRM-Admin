@@ -1,4 +1,4 @@
-package com.SReMake.repository.system;
+package com.SReMake.repository.user;
 
 import com.SReMake.model.system.Role;
 import com.SReMake.model.system.dto.RoleSearchInput;

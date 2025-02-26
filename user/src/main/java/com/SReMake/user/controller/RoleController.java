@@ -1,11 +1,11 @@
-package com.SReMake.system.controller;
+package com.SReMake.user.controller;
 
 import com.SReMake.common.result.ResponseResult;
 import com.SReMake.common.result.ResponseResultPage;
 import com.SReMake.model.system.Role;
 import com.SReMake.model.system.dto.RoleSearchInput;
 import com.SReMake.model.system.dto.UpdateRoleInput;
-import com.SReMake.system.service.RoleService;
+import com.SReMake.user.service.RoleService;
 import org.babyfish.jimmer.client.EnableImplicitApi;
 import org.babyfish.jimmer.spring.repo.PageParam;
 import org.springframework.web.bind.annotation.*;
