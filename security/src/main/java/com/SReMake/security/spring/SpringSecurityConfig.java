@@ -32,6 +32,9 @@ public class SpringSecurityConfig {
         // 配置放行路径
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers(
+                        "/jimmer-client/**",
+                        "/openapi.html",
+                        "/openapi.yml",
                         "/api/v1/auth/login",
                         "/api/v1/auth/captcha",
                         "/api/v1/auth/logout"

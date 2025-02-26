@@ -10,6 +10,8 @@ dependencies {
     implementation(starter.spring.boot.starter.security)
     implementation(starter.spring.boot.starter.data.redis)
     runtimeOnly(utils.jimmer.client.swagger)
+    annotationProcessor(apt.jimmer)
+    compileOnly(apt.jimmer)
     annotationProcessor(apt.lombok)
     compileOnly(apt.lombok)
 }

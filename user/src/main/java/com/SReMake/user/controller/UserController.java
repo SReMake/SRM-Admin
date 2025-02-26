@@ -8,9 +8,11 @@ import com.SReMake.model.user.dto.UserSearchInput;
 import com.SReMake.user.service.UserService;
 import com.SReMake.user.vo.UserVo;
 import org.babyfish.jimmer.client.EnableImplicitApi;
+import org.babyfish.jimmer.client.meta.Api;
 import org.babyfish.jimmer.spring.repo.PageParam;
 import org.springframework.web.bind.annotation.*;
 
+@Api
 @RestController
 @RequestMapping("/api/v1/user")
 @EnableImplicitApi

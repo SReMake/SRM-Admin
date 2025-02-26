@@ -7,10 +7,12 @@ import com.SReMake.user.vo.CaptchaVo;
 import com.SReMake.user.vo.JwtVo;
 import jakarta.servlet.http.HttpServletRequest;
 import org.babyfish.jimmer.client.EnableImplicitApi;
+import org.babyfish.jimmer.client.meta.Api;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/auth")
+@Api
 @EnableImplicitApi
 public class AuthController {
 

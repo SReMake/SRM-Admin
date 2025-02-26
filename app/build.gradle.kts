@@ -33,6 +33,7 @@ dependencies {
 
     developmentOnly(development.spring.boot.devtools)
 
+    compileOnly(apt.jimmer)
     compileOnly(apt.lombok)
 
     testRuntimeOnly(test.junit.platform.launcher)
