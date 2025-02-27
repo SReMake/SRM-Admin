@@ -1,4 +1,4 @@
-package com.SReMake.model.ext;
+package com.SReMake.security.spring;
 
 import com.SReMake.model.user.User;
 import org.springframework.security.core.userdetails.UserDetails;

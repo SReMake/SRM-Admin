@@ -1,7 +1,6 @@
 package com.SReMake.security.spring;
 
 
-import com.SReMake.model.ext.CustomUserDetails;
 import com.SReMake.model.user.User;
 import com.SReMake.repository.user.UserRepository;
 import org.casbin.jcasbin.main.Enforcer;
