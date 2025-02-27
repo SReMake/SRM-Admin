@@ -2,6 +2,7 @@ package com.SReMake.user.service;
 
 import com.SReMake.model.system.Role;
 import com.SReMake.model.user.User;
+import com.SReMake.user.vo.RoleVo;
 
 import java.util.List;
 
@@ -14,10 +15,10 @@ public interface UserRoleService {
     /**
      * 删除用户的角色
      */
-    void deleteUserRoles(long userId, List<Long> roleId);
+    void deleteUserRoles(long userId, List<Long> roleIds);
 
     /**
      * 查看当前用户角色
      */
-    List<Role> listUserRole(User user);
+    List<RoleVo> listUserRole(User user);
 }

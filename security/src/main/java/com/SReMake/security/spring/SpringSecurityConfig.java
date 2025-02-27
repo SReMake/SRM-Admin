@@ -22,7 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SpringSecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
-    private final CustomerUserDetailsService customerUserDetailsService;
+    private final CasbinFilter casbinFilter;
 
     @SneakyThrows
     @Bean
@@ -30,30 +30,27 @@ public class SpringSecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable);
         http.sessionManagement(conf -> conf.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         // 配置放行路径
+
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers(
-                        "/jimmer-client/**",
-                        "/openapi.html",
-                        "/openapi.yml",
-                        "/api/v1/auth/login",
-                        "/api/v1/auth/captcha",
-                        "/api/v1/auth/logout"
+                        SecurityConf.WHITE_LIST.toArray(new String[0])
                 )
                 .permitAll()
                 .anyRequest().authenticated()
         );
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(casbinFilter, JwtAuthenticationFilter.class);
         return http.build();
     }
-
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+//
+//    @Bean
+//    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+//        return authenticationConfiguration.getAuthenticationManager();
+//    }
+//
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
 
 }

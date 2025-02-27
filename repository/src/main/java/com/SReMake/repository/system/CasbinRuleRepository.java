@@ -1,13 +1,8 @@
 package com.SReMake.repository.system;
 
-import org.babyfish.jimmer.sql.JSqlClient;
-import org.springframework.stereotype.Repository;
+import com.SReMake.model.system.CasbinRule;
+import org.babyfish.jimmer.spring.repo.JavaRepository;
 
-@Repository
-public class CasbinRuleRepository {
-    private final JSqlClient sql;
-
-    public CasbinRuleRepository(JSqlClient sql) {
-        this.sql = sql;
-    }
+public interface CasbinRuleRepository extends JavaRepository<CasbinRule, Integer> {
+    /**查询c*/
 }

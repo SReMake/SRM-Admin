@@ -1,38 +1,49 @@
 package com.SReMake.security.spring;
 
 
+import com.SReMake.model.ext.CustomUserDetails;
 import com.SReMake.model.user.User;
 import com.SReMake.repository.user.UserRepository;
-import lombok.RequiredArgsConstructor;
+import org.casbin.jcasbin.main.Enforcer;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.List;
 
-@Component
+@Service
 public class CustomerUserDetailsService implements UserDetailsService {
-    private final UserRepository userRepository ;
+    private final UserRepository userRepository;
+    private final Enforcer enforcer;
 
-    public CustomerUserDetailsService(UserRepository userRepository) {
+    public CustomerUserDetailsService(UserRepository userRepository, Enforcer enforcer) {
         this.userRepository = userRepository;
+        this.enforcer = enforcer;
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public CustomUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not found!");
         }
 
-        return  new UserDetails() {
+        return new CustomUserDetails() {
+            @Override
+            public String getUserId() {
+                return user.username();
+            }
+
+            @Override
+            public User getUser() {
+                return user;
+            }
+
             @Override
             public Collection<? extends GrantedAuthority> getAuthorities() {
-//                TODO casbin查找用户角色
-                return List.of();
+                return enforcer.getRolesForUser(String.valueOf(user.id())).stream().map(SimpleGrantedAuthority::new).toList();
             }
 
             @Override
@@ -44,7 +55,7 @@ public class CustomerUserDetailsService implements UserDetailsService {
             public String getUsername() {
                 return user.username();
             }
-        } ;
+        };
 
     }
 }

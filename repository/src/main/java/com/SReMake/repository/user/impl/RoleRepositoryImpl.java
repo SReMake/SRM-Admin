@@ -11,6 +11,9 @@ import org.babyfish.jimmer.sql.JSqlClient;
 import org.babyfish.jimmer.sql.ast.LikeMode;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
+import java.util.List;
+
 @Repository
 public class RoleRepositoryImpl extends AbstractJavaRepository<Role, Long> implements RoleRepository {
     public RoleRepositoryImpl(JSqlClient sql) {
@@ -24,5 +27,13 @@ public class RoleRepositoryImpl extends AbstractJavaRepository<Role, Long> imple
                 ).orderBy(Tables.ROLE_TABLE.id().desc())
                 .select(Tables.ROLE_TABLE)
                 .fetchPage(pageParam.getIndex(), pageParam.getSize());
+    }
+
+    @Override
+    public List<Role> findByNams(Collection<String> names) {
+
+        return this.sql.createQuery(Tables.ROLE_TABLE).where(
+                Tables.ROLE_TABLE.name().in(names)
+        ).select(Tables.ROLE_TABLE).fetchOptional().stream().toList();
     }
 }

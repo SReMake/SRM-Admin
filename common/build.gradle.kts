@@ -6,6 +6,8 @@ dependencies {
     implementation(starter.spring.boot.starter.web)
     implementation(starter.spring.boot.starter.data.redis)
     implementation(starter.spring.boot.starter.security)
+    implementation(utils.hutool.all)
+
     api(starter.jimmer.spring.boot.starter)
     annotationProcessor(apt.lombok)
     compileOnly(apt.lombok)
