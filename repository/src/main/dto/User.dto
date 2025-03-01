@@ -4,46 +4,31 @@ import java.time.LocalDateTime
 
 input UserInput {
     username
-
     password
-
     phone
 }
 
 input UpdateUserInput {
     username?
-
     phone
-
     email
-
     avatar
 }
 
 input UserSearchInput {
     id?
-
     username?
-
     phone
-
     status?
-
-    createAtStart :LocalDateTime?
-
-    updateAtStart :LocalDateTime?
-
-    createAtEnd :LocalDateTime?
-
-    updateAtEnd :LocalDateTime?
+    createAtStart: LocalDateTime?
+    updateAtStart: LocalDateTime?
+    createAtEnd: LocalDateTime?
+    updateAtEnd: LocalDateTime?
 }
 
 input UserLoginInput {
     username
-
     password
-
-    captcha : String
-
-    captchaId : String
+    captcha: String
+    captchaId: String
 }

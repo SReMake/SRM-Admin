@@ -1,4 +1,4 @@
-export com.SReMake.model.system.Role
+export com.SReMake.model.user.Role
 
 import java.time.LocalDateTime
 

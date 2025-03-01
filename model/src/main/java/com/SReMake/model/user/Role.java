@@ -1,6 +1,5 @@
-package com.SReMake.model.system;
+package com.SReMake.model.user;
 
-import com.SReMake.model.user.User;
 import org.babyfish.jimmer.sql.*;
 import org.jetbrains.annotations.Nullable;
 
@@ -10,7 +9,7 @@ import java.time.LocalDateTime;
 @Table(name = "srm_role")
 public interface Role {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id();
 
     LocalDateTime createAt();

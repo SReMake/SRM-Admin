@@ -1,8 +1,6 @@
 package com.SReMake.user.service.impl;
 
-import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.digest.BCrypt;
-import cn.hutool.crypto.digest.DigestUtil;
 import com.SReMake.model.user.User;
 import com.SReMake.model.user.UserDraft;
 import com.SReMake.model.user.dto.UpdateUserInput;
@@ -29,10 +27,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUser(UserInput user) {
-        String BcryptPassword = BCrypt.hashpw(user.getPassword());
-        user.setPassword(BcryptPassword);
-        userRepository.insert(user);
+    public void addUser(User user, UserInput params) {
+        String BcryptPassword = BCrypt.hashpw(params.getPassword());
+        params.setPassword(BcryptPassword);
+        userRepository.insert(params);
     }
 
     @Override
@@ -42,37 +40,40 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(long id, UpdateUserInput user) {
+    public void updateUser(long id, User user, UpdateUserInput params) {
         userRepository.update(UserDraft.$.produce(draft -> {
             draft.setId(id);
-            if (!Objects.isNull(user.getUsername())) {
-                draft.setUsername(user.getUsername());
+            if (!Objects.isNull(params.getUsername())) {
+                draft.setUsername(params.getUsername());
             }
-            if (!Objects.isNull(user.getEmail())) {
-                draft.setEmail(user.getEmail());
+            if (!Objects.isNull(params.getEmail())) {
+                draft.setEmail(params.getEmail());
             }
-            if (!Objects.isNull(user.getPhone())) {
-                draft.setPhone(user.getPhone());
+            if (!Objects.isNull(params.getPhone())) {
+                draft.setPhone(params.getPhone());
             }
-            if (!Objects.isNull(user.getAvatar())) {
-                draft.setAvatar(user.getAvatar());
+            if (!Objects.isNull(params.getAvatar())) {
+                draft.setAvatar(params.getAvatar());
             }
+            draft.setUpdateBy(user);
         }));
     }
 
     @Override
-    public void disableUser(long id) {
+    public void disableUser(long id, User user) {
         userRepository.update(UserDraft.$.produce(draft -> {
             draft.setId(id);
             draft.setStatus(User.Status.DISABLE);
+            draft.setUpdateBy(user);
         }));
     }
 
     @Override
-    public void enableUser(long id) {
+    public void enableUser(long id, User user) {
         userRepository.update(UserDraft.$.produce(draft -> {
             draft.setId(id);
             draft.setStatus(User.Status.NORMAL);
+            draft.setUpdateBy(user);
         }));
     }
 }

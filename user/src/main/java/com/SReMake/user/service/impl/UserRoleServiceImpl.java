@@ -2,7 +2,7 @@ package com.SReMake.user.service.impl;
 
 import com.SReMake.common.exception.can.RoleException;
 import com.SReMake.common.exception.can.ValidationException;
-import com.SReMake.model.system.Role;
+import com.SReMake.model.user.Role;
 import com.SReMake.model.user.User;
 import com.SReMake.repository.system.CasbinRuleRepository;
 import com.SReMake.repository.user.RoleRepository;

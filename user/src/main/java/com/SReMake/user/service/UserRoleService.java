@@ -1,6 +1,5 @@
 package com.SReMake.user.service;
 
-import com.SReMake.model.system.Role;
 import com.SReMake.model.user.User;
 import com.SReMake.user.vo.RoleVo;
 

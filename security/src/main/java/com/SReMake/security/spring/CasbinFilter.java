@@ -36,6 +36,11 @@ public class CasbinFilter extends OncePerRequestFilter {
         if (token != null && JwtUtils.validateToken(token, jwtConfig.getSecretKey())) {
             String action = request.getMethod();
             String username = JwtUtils.extractUsernameFromToken(token);
+//            是管理员就跳过
+            if (username.equals("admin") || enforcer.getRolesForUser(username).contains("administrator")) {
+                filterChain.doFilter(request, response);
+                return;
+            }
             if (enforcer.enforce(username, action, resource)) {
                 filterChain.doFilter(request, response);
             } else {

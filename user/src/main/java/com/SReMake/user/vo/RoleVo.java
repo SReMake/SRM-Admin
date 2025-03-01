@@ -1,6 +1,6 @@
 package com.SReMake.user.vo;
 
-import com.SReMake.model.system.Role;
+import com.SReMake.model.user.Role;
 import lombok.Data;
 
 @Data

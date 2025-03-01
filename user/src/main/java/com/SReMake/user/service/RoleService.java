@@ -1,8 +1,9 @@
 package com.SReMake.user.service;
 
-import com.SReMake.model.system.Role;
-import com.SReMake.model.system.dto.RoleSearchInput;
-import com.SReMake.model.system.dto.UpdateRoleInput;
+import com.SReMake.model.user.Role;
+import com.SReMake.model.user.User;
+import com.SReMake.model.user.dto.RoleSearchInput;
+import com.SReMake.model.user.dto.UpdateRoleInput;
 import org.babyfish.jimmer.Page;
 import org.babyfish.jimmer.spring.repo.PageParam;
 
@@ -10,7 +11,7 @@ public interface RoleService {
     /**
      * 添加角色
      */
-    void addRole(UpdateRoleInput role);
+    void addRole(User user, UpdateRoleInput params);
 
     /**
      * 删除角色
@@ -20,7 +21,7 @@ public interface RoleService {
     /**
      * 更新角色
      */
-    void updateRole(long id, UpdateRoleInput role);
+    void updateRole(long id,User user ,UpdateRoleInput params);
 
     /**
      * 获取角色列表

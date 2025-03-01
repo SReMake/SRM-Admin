@@ -6,6 +6,7 @@ import com.SReMake.repository.user.UserRepository;
 import org.casbin.jcasbin.main.Enforcer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -13,11 +14,11 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 
 @Service
-public class CustomerUserDetailsService implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
     private final Enforcer enforcer;
 
-    public CustomerUserDetailsService(UserRepository userRepository, Enforcer enforcer) {
+    public CustomUserDetailsService(UserRepository userRepository, Enforcer enforcer) {
         this.userRepository = userRepository;
         this.enforcer = enforcer;
     }

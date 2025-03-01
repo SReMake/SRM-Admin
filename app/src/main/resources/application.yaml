@@ -12,7 +12,7 @@ spring:
       database: 0
 jwt:
   secret-key: your_key # jwt签名加密秘钥
-  expireTime: 7200000 # jwt过期时间毫秒
+  expireTime: 15552000000 # jwt过期时间毫秒
 jimmer:
   offset-optimizing-threshold: 10
   id-only-target-checking-level: ALL
