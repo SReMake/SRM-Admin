@@ -1,6 +1,5 @@
 package com.SReMake.user.service;
 
-import com.SReMake.model.user.User;
 import com.SReMake.model.user.dto.UpdateUserInput;
 import com.SReMake.model.user.dto.UserInput;
 import com.SReMake.model.user.dto.UserSearchInput;
@@ -13,7 +12,7 @@ public interface UserService {
     /**
      * 添加用户
      */
-    void addUser(User user, UserInput params);
+    void addUser( UserInput params);
 
     /**
      * 查看用户列表
@@ -24,15 +23,15 @@ public interface UserService {
     /**
      * 更新用户信息
      */
-    void updateUser(long id, User user, UpdateUserInput params);
+    void updateUser(long id, UpdateUserInput params);
 
     /**
      * 禁用账户
      */
-    void disableUser(long id,User user);
+    void disableUser(long id);
 
     /**
      * 启用账户
      */
-    void enableUser(long id,User user);
+    void enableUser(long id);
 }

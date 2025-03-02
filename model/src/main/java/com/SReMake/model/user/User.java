@@ -1,21 +1,14 @@
 package com.SReMake.model.user;
 
-import org.babyfish.jimmer.sql.*;
+import com.SReMake.model.BaseEntity;
+import org.babyfish.jimmer.sql.Entity;
+import org.babyfish.jimmer.sql.Table;
 import org.jetbrains.annotations.Nullable;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "srm_user")
-public interface User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id();
+public interface User extends BaseEntity {
 
-    LocalDateTime createAt();
-
-    @Nullable
-    LocalDateTime updateAt();
 
     String username();
 
@@ -32,13 +25,6 @@ public interface User {
 
     Status status();
 
-    @Nullable
-    @OneToOne
-    User createBy();
-
-    @Nullable
-    @OneToOne
-    User updateBy();
 
     public enum Status {
         /**

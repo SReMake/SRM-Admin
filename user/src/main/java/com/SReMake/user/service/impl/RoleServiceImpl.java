@@ -4,7 +4,6 @@ import com.SReMake.common.exception.can.ValidationException;
 import com.SReMake.model.Immutables;
 import com.SReMake.model.user.Role;
 import com.SReMake.model.user.RoleDraft;
-import com.SReMake.model.user.User;
 import com.SReMake.model.user.dto.RoleSearchInput;
 import com.SReMake.model.user.dto.UpdateRoleInput;
 import com.SReMake.repository.user.impl.RoleRepositoryImpl;
@@ -29,11 +28,10 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public void addRole(User user, UpdateRoleInput params) {
+    public void addRole(UpdateRoleInput params) {
         roleRepositoryImpl.insert(Immutables.createRole(
                 draft -> {
                     draft.setName(params.getName());
-                    draft.setCreateBy(user);
                 }
         ));
     }
@@ -54,12 +52,11 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public void updateRole(long id, User user, UpdateRoleInput params) {
+    public void updateRole(long id, UpdateRoleInput params) {
         roleRepositoryImpl.update(RoleDraft.$.produce(draft -> {
             draft.setId(id);
             if (!Objects.isNull(params.getName())) {
                 draft.setName(params.getName());
-                draft.setUpdateBy(user);
             }
         }));
     }

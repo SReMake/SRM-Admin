@@ -3,7 +3,6 @@ version = "0.0.1-SNAPSHOT"
 
 dependencies {
     implementation(project(":common"))
-    implementation(project(":security"))
     implementation(project(":repository"))
     implementation(utils.hutool.all)
     implementation(starter.spring.boot.starter.web)

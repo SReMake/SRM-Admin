@@ -2,6 +2,7 @@ package com.SReMake.security.spring;
 
 import com.SReMake.common.conf.JwtConfig;
 import com.SReMake.common.utils.JwtUtils;
+import com.SReMake.model.security.CustomUserDetails;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

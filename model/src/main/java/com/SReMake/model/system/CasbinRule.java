@@ -1,10 +1,7 @@
 package com.SReMake.model.system;
 
-import com.SReMake.model.user.User;
 import org.babyfish.jimmer.sql.*;
 import org.jetbrains.annotations.Nullable;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "casbin_rule")

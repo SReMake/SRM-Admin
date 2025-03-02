@@ -1,7 +1,7 @@
 package com.SReMake.user.controller;
 
 import com.SReMake.common.result.ResponseResult;
-import com.SReMake.security.spring.CustomUserDetails;
+import com.SReMake.model.security.CustomUserDetails;
 import com.SReMake.user.service.UserRoleService;
 import com.SReMake.user.vo.RoleVo;
 import org.babyfish.jimmer.client.EnableImplicitApi;

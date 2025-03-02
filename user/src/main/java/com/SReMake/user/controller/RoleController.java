@@ -5,11 +5,9 @@ import com.SReMake.common.result.ResponseResultPage;
 import com.SReMake.model.user.Role;
 import com.SReMake.model.user.dto.RoleSearchInput;
 import com.SReMake.model.user.dto.UpdateRoleInput;
-import com.SReMake.security.spring.CustomUserDetails;
 import com.SReMake.user.service.RoleService;
 import org.babyfish.jimmer.client.EnableImplicitApi;
 import org.babyfish.jimmer.spring.repo.PageParam;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,8 +24,8 @@ public class RoleController {
      * 添加角色
      */
     @PostMapping()
-    public ResponseResult<String> addRole(@AuthenticationPrincipal CustomUserDetails userDetails, @RequestBody UpdateRoleInput role) {
-        roleService.addRole(userDetails.getUser(), role);
+    public ResponseResult<String> addRole(@RequestBody UpdateRoleInput role) {
+        roleService.addRole(role);
         return ResponseResult.success("OK");
     }
 
@@ -35,7 +33,7 @@ public class RoleController {
      * 删除角色
      */
     @DeleteMapping("/{id}")
-    public ResponseResult<String> deleteRole(@AuthenticationPrincipal CustomUserDetails userDetails, @PathVariable long id) {
+    public ResponseResult<String> deleteRole(@PathVariable long id) {
         roleService.deleteRole(id);
         return ResponseResult.success("OK");
     }
@@ -44,8 +42,8 @@ public class RoleController {
      * 更新角色
      */
     @PutMapping("/{id}")
-    public ResponseResult<String> updateRole(@AuthenticationPrincipal CustomUserDetails userDetails, @PathVariable long id, @RequestBody UpdateRoleInput role) {
-        roleService.updateRole(id, userDetails.getUser(), role);
+    public ResponseResult<String> updateRole(@PathVariable long id, @RequestBody UpdateRoleInput role) {
+        roleService.updateRole(id, role);
         return ResponseResult.success("OK");
     }
 

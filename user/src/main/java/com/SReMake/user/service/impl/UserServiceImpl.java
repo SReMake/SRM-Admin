@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUser(User user, UserInput params) {
+    public void addUser(UserInput params) {
         String BcryptPassword = BCrypt.hashpw(params.getPassword());
         params.setPassword(BcryptPassword);
         userRepository.insert(params);
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(long id, User user, UpdateUserInput params) {
+    public void updateUser(long id, UpdateUserInput params) {
         userRepository.update(UserDraft.$.produce(draft -> {
             draft.setId(id);
             if (!Objects.isNull(params.getUsername())) {
@@ -55,25 +55,22 @@ public class UserServiceImpl implements UserService {
             if (!Objects.isNull(params.getAvatar())) {
                 draft.setAvatar(params.getAvatar());
             }
-            draft.setUpdateBy(user);
         }));
     }
 
     @Override
-    public void disableUser(long id, User user) {
+    public void disableUser(long id) {
         userRepository.update(UserDraft.$.produce(draft -> {
             draft.setId(id);
             draft.setStatus(User.Status.DISABLE);
-            draft.setUpdateBy(user);
         }));
     }
 
     @Override
-    public void enableUser(long id, User user) {
+    public void enableUser(long id) {
         userRepository.update(UserDraft.$.produce(draft -> {
             draft.setId(id);
             draft.setStatus(User.Status.NORMAL);
-            draft.setUpdateBy(user);
         }));
     }
 }

@@ -1,29 +1,13 @@
 package com.SReMake.model.user;
 
-import org.babyfish.jimmer.sql.*;
-import org.jetbrains.annotations.Nullable;
-
-import java.time.LocalDateTime;
+import com.SReMake.model.BaseEntity;
+import org.babyfish.jimmer.sql.Entity;
+import org.babyfish.jimmer.sql.Table;
 
 @Entity
 @Table(name = "srm_role")
-public interface Role {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id();
-
-    LocalDateTime createAt();
-
-    @Nullable
-    LocalDateTime updateAt();
+public interface Role extends BaseEntity {
 
     String name();
 
-    @Nullable
-    @OneToOne
-    User createBy();
-
-    @Nullable
-    @OneToOne
-    User updateBy();
 }

@@ -1,7 +1,6 @@
 package com.SReMake.security.casbin;
 
 import com.zaxxer.hikari.HikariDataSource;
-import lombok.Getter;
 import lombok.SneakyThrows;
 import org.casbin.adapter.JDBCAdapter;
 import org.casbin.jcasbin.main.Enforcer;
