@@ -4,12 +4,12 @@ import com.SReMake.common.exception.can.RoleException;
 import com.SReMake.common.exception.can.ValidationException;
 import com.SReMake.model.user.Role;
 import com.SReMake.model.user.User;
-import com.SReMake.repository.system.CasbinRuleRepository;
 import com.SReMake.repository.user.RoleRepository;
 import com.SReMake.repository.user.UserRepository;
 import com.SReMake.user.service.UserRoleService;
 import com.SReMake.user.vo.RoleVo;
 import org.casbin.jcasbin.main.Enforcer;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -21,16 +21,16 @@ public class UserRoleServiceImpl implements UserRoleService {
     private final Enforcer enforcer;
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
-    private final CasbinRuleRepository ruleRepository;
 
-    public UserRoleServiceImpl(Enforcer enforcer, RoleRepository roleRepository, UserRepository userRepository, CasbinRuleRepository ruleRepository) {
+
+    public UserRoleServiceImpl(Enforcer enforcer, RoleRepository roleRepository, UserRepository userRepository) {
         this.enforcer = enforcer;
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
-        this.ruleRepository = ruleRepository;
     }
 
     @Override
+    @CacheEvict(value = "resources", key = "#userId")
     public void addUserRoles(long userId, List<Long> roleIds) {
 
         List<String> rolesForUser = enforcer.getRolesForUser(String.valueOf(userId));
@@ -61,6 +61,7 @@ public class UserRoleServiceImpl implements UserRoleService {
     }
 
     @Override
+    @CacheEvict(value = "resources", key = "#userId")
     public void deleteUserRoles(long userId, List<Long> roleIds) {
         List<Role> roles = roleRepository.findByIds(roleIds);
         User user = userRepository.findById(userId);

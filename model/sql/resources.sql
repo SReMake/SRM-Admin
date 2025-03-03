@@ -4,7 +4,7 @@ create table srm_resources
     resources    varchar(256)            not null,
     action       varchar(256)            not null,
     type         varchar(26)             not null,
-    parent       bigint,
+    parent_id       bigint,
     create_at    timestamp default now() not null,
     update_at    timestamp,
     create_by_id bigint

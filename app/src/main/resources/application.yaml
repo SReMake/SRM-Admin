@@ -10,6 +10,11 @@ spring:
       port: 6379
       password:
       database: 0
+  cache:
+    type: redis
+    redis:
+      time-to-live: 24h
+      cache-null-values: false
 jwt:
   secret-key: your_key # jwt签名加密秘钥
   expireTime: 15552000000 # jwt过期时间毫秒

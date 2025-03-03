@@ -4,7 +4,7 @@ import com.SReMake.model.BaseEntity;
 import org.babyfish.jimmer.sql.Entity;
 import org.babyfish.jimmer.sql.OneToOne;
 import org.babyfish.jimmer.sql.Table;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 @Entity
 @Table(name = "srm_resources")
@@ -15,7 +15,7 @@ public interface Resources extends BaseEntity {
 
     Type type();
 
-    @NotNull
+    @Nullable
     @OneToOne
     Resources parent();
 
