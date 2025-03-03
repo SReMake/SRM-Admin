@@ -19,10 +19,10 @@ public class CasbinEnforcer {
 //        rbac 模型
         Model model = Model.newModelFromString("""
                 [request_definition]
-                r = sub, obj, act
+                r = sub, router, act
                 
                 [policy_definition]
-                p = sub, obj, act
+                p = sub, router, act
                 
                 [role_definition]
                 g = _, _
@@ -31,7 +31,7 @@ public class CasbinEnforcer {
                 e = some(where (p.eft == allow))
                 
                 [matchers]
-                m = g(r.sub, p.sub) && r.obj == p.obj && r.act == p.act""");
+                m = g(r.sub, p.sub) && r.router == p.router && r.act == p.act""");
         enforcer = new Enforcer(model, adapter, true);
     }
 

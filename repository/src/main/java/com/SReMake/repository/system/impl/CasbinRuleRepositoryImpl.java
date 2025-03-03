@@ -13,4 +13,8 @@ public class CasbinRuleRepositoryImpl extends AbstractJavaRepository<CasbinRule,
         super(sql);
     }
 
+    @Override
+    public int countMatches(String router) {
+        return 0;
+    }
 }

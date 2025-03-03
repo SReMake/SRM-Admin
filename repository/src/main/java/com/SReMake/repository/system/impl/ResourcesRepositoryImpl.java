@@ -7,7 +7,7 @@ import org.babyfish.jimmer.sql.JSqlClient;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ResourcesRepositoryImpl extends AbstractJavaRepository<Resources, Integer> implements ResourcesRepository {
+public class ResourcesRepositoryImpl extends AbstractJavaRepository<Resources, Long> implements ResourcesRepository {
     public ResourcesRepositoryImpl(JSqlClient sql) {
         super(sql);
     }

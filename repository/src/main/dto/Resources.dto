@@ -1,0 +1,11 @@
+export com.SReMake.model.system.Resources
+
+import com.SReMake.model.system.Resources
+
+input ResourcesInput {
+    resources
+
+    action
+
+    type
+}
