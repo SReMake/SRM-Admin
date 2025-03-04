@@ -11,12 +11,14 @@ import com.SReMake.user.vo.RoleVo;
 import org.casbin.jcasbin.main.Enforcer;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 @Service
+@Transactional
 public class UserRoleServiceImpl implements UserRoleService {
     private final Enforcer enforcer;
     private final RoleRepository roleRepository;
@@ -30,7 +32,7 @@ public class UserRoleServiceImpl implements UserRoleService {
     }
 
     @Override
-    @CacheEvict(value = "resources", key = "#userId")
+    @CacheEvict(value = "resources", key = "'resources_'+#userId")
     public void addUserRoles(long userId, List<Long> roleIds) {
 
         List<String> rolesForUser = enforcer.getRolesForUser(String.valueOf(userId));
@@ -61,7 +63,7 @@ public class UserRoleServiceImpl implements UserRoleService {
     }
 
     @Override
-    @CacheEvict(value = "resources", key = "#userId")
+    @CacheEvict(value = "resources", key = "'resources_'+#userId")
     public void deleteUserRoles(long userId, List<Long> roleIds) {
         List<Role> roles = roleRepository.findByIds(roleIds);
         User user = userRepository.findById(userId);
@@ -78,6 +80,6 @@ public class UserRoleServiceImpl implements UserRoleService {
 
     @Override
     public List<RoleVo> listUserRole(User user) {
-        return roleRepository.findByNams(enforcer.getRolesForUser(user.username())).stream().map(RoleVo::new).toList();
+        return roleRepository.listByNames(enforcer.getRolesForUser(user.username())).stream().map(RoleVo::new).toList();
     }
 }

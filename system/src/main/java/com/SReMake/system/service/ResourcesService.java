@@ -21,7 +21,6 @@ public interface ResourcesService {
     /**
      * 获取资源列表
      */
-
     List<ResourcesVo> listResources(@NotNull User user, List<String> roles);
 
 }

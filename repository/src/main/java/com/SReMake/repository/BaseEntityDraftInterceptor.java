@@ -33,10 +33,10 @@ public class BaseEntityDraftInterceptor
             CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
             User user = customUserDetails.getUser();
             if (!ImmutableObjects.isLoaded(draft, BaseEntityProps.UPDATE_BY)) {
-                draft.setUpdateBy(user);
+                draft.setUpdateById(user.id());
             }
             if (original == null && !ImmutableObjects.isLoaded(draft, BaseEntityProps.CREATE_BY)) {
-                draft.setCreateBy(user);
+                draft.setCreateById(user.id());
             }
         }
 

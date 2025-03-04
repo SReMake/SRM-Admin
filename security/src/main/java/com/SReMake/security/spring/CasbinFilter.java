@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.casbin.jcasbin.main.Enforcer;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 @Slf4j
@@ -27,9 +28,11 @@ public class CasbinFilter extends OncePerRequestFilter {
     @SneakyThrows
     protected void doFilterInternal(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull FilterChain filterChain) {
         String resource = request.getRequestURI();
-        if (SecurityConf.WHITE_LIST.contains(resource)) {
-            filterChain.doFilter(request, response);
-            return;
+        for (String pattern : SecurityConf.WHITE_LIST) {
+            if (new AntPathMatcher().match(pattern, resource)) {
+                filterChain.doFilter(request, response);
+                return;
+            }
         }
         String token = JwtUtils.extractTokenFromRequest(request);
 

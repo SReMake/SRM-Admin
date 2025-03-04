@@ -36,7 +36,7 @@ public class RoleRepositoryImpl extends AbstractJavaRepository<Role, Long> imple
     }
 
     @Override
-    public List<Role> findByNams(Collection<String> names) {
+    public List<Role> listByNames(Collection<String> names) {
 
         return this.sql.createQuery(Tables.ROLE_TABLE).where(
                 Tables.ROLE_TABLE.name().in(names)
