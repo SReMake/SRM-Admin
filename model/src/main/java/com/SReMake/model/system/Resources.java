@@ -1,9 +1,7 @@
 package com.SReMake.model.system;
 
 import com.SReMake.model.BaseEntity;
-import org.babyfish.jimmer.sql.Entity;
-import org.babyfish.jimmer.sql.OneToOne;
-import org.babyfish.jimmer.sql.Table;
+import org.babyfish.jimmer.sql.*;
 import org.jetbrains.annotations.Nullable;
 
 @Entity
@@ -16,7 +14,8 @@ public interface Resources extends BaseEntity {
     Type type();
 
     @Nullable
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(foreignKeyType = ForeignKeyType.FAKE)
     Resources parent();
 
     public enum Type {

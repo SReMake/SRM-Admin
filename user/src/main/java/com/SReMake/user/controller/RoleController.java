@@ -51,7 +51,7 @@ public class RoleController {
      * 获取角色列表
      */
     @GetMapping("/list")
-    public ResponseResultPage<Role> listRole(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size, @RequestParam(required = false) RoleSearchInput role) {
+    public ResponseResultPage<Role> listRole(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size, @ModelAttribute RoleSearchInput role) {
         PageParam pageParam = PageParam.byNo(page, size);
         return ResponseResultPage.success(roleService.listRole(pageParam, role), pageParam);
     }

@@ -1,5 +1,6 @@
 package com.SReMake.repository.user.impl;
 
+import com.SReMake.model.Fetchers;
 import com.SReMake.model.Tables;
 import com.SReMake.model.user.Role;
 import com.SReMake.model.user.dto.RoleSearchInput;
@@ -9,6 +10,7 @@ import org.babyfish.jimmer.spring.repo.PageParam;
 import org.babyfish.jimmer.spring.repo.support.AbstractJavaRepository;
 import org.babyfish.jimmer.sql.JSqlClient;
 import org.babyfish.jimmer.sql.ast.LikeMode;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
@@ -22,16 +24,16 @@ public class RoleRepositoryImpl extends AbstractJavaRepository<Role, Long> imple
     }
 
     @Override
-    public Page<Role> findPage(PageParam pageParam, RoleSearchInput params) {
-        if (Objects.isNull(params)) {
-            return this.findPage(pageParam);
-        } else {
-            return this.sql.createQuery(Tables.ROLE_TABLE).where(
-                            Tables.ROLE_TABLE.name().likeIf(params.getName(), LikeMode.ANYWHERE)
-                    ).orderBy(Tables.ROLE_TABLE.id().desc())
-                    .select(Tables.ROLE_TABLE)
-                    .fetchPage(pageParam.getIndex(), pageParam.getSize());
-        }
+    public Page<Role> findPage(PageParam pageParam, @NotNull RoleSearchInput params) {
+        return this.sql.createQuery(Tables.ROLE_TABLE).where(
+                        Tables.ROLE_TABLE.name().likeIf(params.getName(), LikeMode.ANYWHERE)
+                ).orderBy(Tables.ROLE_TABLE.id().desc())
+                .select(Tables.ROLE_TABLE.fetch(
+                        Fetchers.ROLE_FETCHER.allScalarFields()
+                                .createBy(Fetchers.USER_FETCHER.username())
+                                .updateBy(Fetchers.USER_FETCHER.username())
+                ))
+                .fetchPage(pageParam.getIndex(), pageParam.getSize());
 
     }
 
