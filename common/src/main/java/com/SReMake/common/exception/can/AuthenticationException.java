@@ -1,6 +1,8 @@
 package com.SReMake.common.exception.can;
 
-public class AuthenticationException extends org.springframework.security.core.AuthenticationException {
+import com.SReMake.common.exception.CanThrowException;
+
+public class AuthenticationException extends org.springframework.security.core.AuthenticationException  implements CanThrowException {
     public AuthenticationException(String msg, Throwable cause) {
         super(msg, cause);
     }

@@ -9,6 +9,7 @@ import org.jetbrains.annotations.Nullable;
 public interface Resources extends BaseEntity {
     String resources();
 
+    @Nullable
     String action();
 
     Type type();

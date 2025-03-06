@@ -1,5 +1,6 @@
 package com.SReMake.system.service.impl;
 
+import com.SReMake.common.exception.can.AuthenticationException;
 import com.SReMake.common.exception.can.ValidationException;
 import com.SReMake.model.system.Resources;
 import com.SReMake.model.system.dto.ResourcesInput;
@@ -10,17 +11,22 @@ import com.SReMake.repository.system.ResourcesRepository;
 import com.SReMake.repository.system.RoleResourcesRepository;
 import com.SReMake.repository.user.RoleRepository;
 import com.SReMake.system.service.ResourcesService;
+import com.SReMake.system.vo.ApiVo;
 import com.SReMake.system.vo.ResourcesVo;
+import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 @Transactional
 public class ResourcesServiceImpl implements ResourcesService {
 
@@ -28,12 +34,14 @@ public class ResourcesServiceImpl implements ResourcesService {
     private final CasbinRuleRepository casbinRuleRepository;
     private final RoleResourcesRepository roleResourcesRepository;
     private final RoleRepository roleRepository;
+    private final RequestMappingHandlerMapping requestMappingHandlerMapping;
 
-    public ResourcesServiceImpl(ResourcesRepository resourcesRepository, CasbinRuleRepository casbinRuleRepository, RoleResourcesRepository roleResourcesRepository, RoleRepository roleRepository) {
+    public ResourcesServiceImpl(ResourcesRepository resourcesRepository, CasbinRuleRepository casbinRuleRepository, RoleResourcesRepository roleResourcesRepository, RoleRepository roleRepository, RequestMappingHandlerMapping requestMappingHandlerMapping) {
         this.resourcesRepository = resourcesRepository;
         this.casbinRuleRepository = casbinRuleRepository;
         this.roleResourcesRepository = roleResourcesRepository;
         this.roleRepository = roleRepository;
+        this.requestMappingHandlerMapping = requestMappingHandlerMapping;
     }
 
     @Override
@@ -63,8 +71,29 @@ public class ResourcesServiceImpl implements ResourcesService {
         if (user.username().equals("admin") || roles.contains("administrator")) {
             return resourcesRepository.findAll().stream().map(ResourcesVo::new).toList();
         } else {
-            return roleResourcesRepository.listByRole(roleRepository.listByNames(roles).stream().map(Role::id).toList()).stream().map(ResourcesVo::new).toList();
+            return roleResourcesRepository.listByRole(roleRepository.listByNames(roles).stream().map(Role::id).toList())
+                    .stream().filter(resources -> resources.type() != Resources.Type.ROUTER)
+                    .map(ResourcesVo::new)
+                    .toList();
         }
 
+    }
+
+    @Override
+    public List<ApiVo> listApis(@NotNull User user, List<String> roles) {
+        if (user.username().equals("admin") || roles.contains("administrator")) {
+            List<ApiVo> apis = new java.util.ArrayList<>();
+            requestMappingHandlerMapping.getHandlerMethods().forEach((method, handler) -> {
+                if (!method.getDirectPaths().isEmpty()) {
+                    apis.add(new ApiVo(
+                            method.getMethodsCondition().getMethods().stream().map(Enum::name).collect(Collectors.toSet()),
+                            method.getDirectPaths()
+                    ));
+                }
+            });
+            return apis;
+        } else {
+            throw new AuthenticationException("");
+        }
     }
 }

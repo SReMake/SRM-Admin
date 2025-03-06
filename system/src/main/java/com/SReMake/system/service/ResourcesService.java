@@ -2,6 +2,7 @@ package com.SReMake.system.service;
 
 import com.SReMake.model.system.dto.ResourcesInput;
 import com.SReMake.model.user.User;
+import com.SReMake.system.vo.ApiVo;
 import com.SReMake.system.vo.ResourcesVo;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,5 +23,10 @@ public interface ResourcesService {
      * 获取资源列表
      */
     List<ResourcesVo> listResources(@NotNull User user, List<String> roles);
+
+    /**
+     * 获取后端框架的全部API
+     */
+    List<ApiVo> listApis(@NotNull User user, List<String> roles);
 
 }

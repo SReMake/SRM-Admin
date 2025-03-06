@@ -12,4 +12,9 @@ public interface RoleResourcesRepository extends JavaRepository<RoleResources, L
      * 根据角色获取资源列表
      */
     List<Resources> listByRole(Collection<Long> roleIds);
+
+    /**
+     * 根据角色id与删除对应的资源id
+     */
+    void deleteByRoleIdAndResourceId(Long roleId, Collection<Long> resourceId);
 }

@@ -1,4 +1,4 @@
 package com.SReMake.common.exception;
 
-public class CNotThrowException extends RuntimeException {
+public interface CNotThrowException {
 }

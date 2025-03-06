@@ -67,15 +67,15 @@ public class UserRoleServiceImpl implements UserRoleService {
     public void deleteUserRoles(long userId, List<Long> roleIds) {
         List<Role> roles = roleRepository.findByIds(roleIds);
         User user = userRepository.findById(userId);
-        if (Objects.isNull(user) || roles.isEmpty()) {
-            throw new ValidationException("the user or role does not exist!");
+        if (Objects.isNull(user)) {
+            throw new ValidationException("user does not exist!");
+        } else if (roles.isEmpty()) {
+            return;
         }
         List<String> rolesForUser = enforcer.getRolesForUser(user.username());
         roles.stream()
                 .filter(role -> Objects.nonNull(role) && rolesForUser.contains(role.name()))
-                .forEach(role -> {
-                    enforcer.deleteRoleForUser(user.username(), role.name());
-                });
+                .forEach(role -> enforcer.deleteRoleForUser(user.username(), role.name()));
     }
 
     @Override

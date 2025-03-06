@@ -2,9 +2,9 @@ create table srm_resources
 (
     id           bigserial primary key,
     resources    varchar(256)            not null,
-    action       varchar(256)            not null,
+    action       varchar(256),
     type         varchar(26)             not null,
-    parent_id       bigint,
+    parent_id    bigint,
     create_at    timestamp default now() not null,
     update_at    timestamp,
     create_by_id bigint

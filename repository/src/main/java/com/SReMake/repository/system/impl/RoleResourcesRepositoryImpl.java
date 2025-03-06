@@ -8,7 +8,6 @@ import org.babyfish.jimmer.spring.repo.support.AbstractJavaRepository;
 import org.babyfish.jimmer.sql.JSqlClient;
 import org.springframework.stereotype.Repository;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -26,5 +25,10 @@ public class RoleResourcesRepositoryImpl extends AbstractJavaRepository<RoleReso
                 .where(Tables.ROLE_RESOURCES_TABLE.roleId().in(roleIds))
                 .select(Tables.ROLE_RESOURCES_TABLE.resources())
                 .fetchOptional().stream().toList();
+    }
+
+    @Override
+    public void deleteByRoleIdAndResourceId(Long roleId, Collection<Long> resourceId) {
+        this.sql.createDelete(Tables.ROLE_RESOURCES_TABLE).where(Tables.ROLE_RESOURCES_TABLE.roleId().eq(roleId), Tables.ROLE_RESOURCES_TABLE.resourcesId().in(resourceId)).execute();
     }
 }

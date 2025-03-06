@@ -4,6 +4,7 @@ import com.SReMake.common.result.ResponseResult;
 import com.SReMake.model.security.CustomUserDetails;
 import com.SReMake.model.system.dto.ResourcesInput;
 import com.SReMake.system.service.ResourcesService;
+import com.SReMake.system.vo.ApiVo;
 import com.SReMake.system.vo.ResourcesVo;
 import org.babyfish.jimmer.client.EnableImplicitApi;
 import org.babyfish.jimmer.client.meta.Api;
@@ -50,6 +51,18 @@ public class ResourcesController {
 
         return ResponseResult.success(
                 resourcesService.listResources(
+                        userDetails.getUser(),
+                        userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList()
+                )
+        );
+    }
+    /**
+     * 获取后端框架的全部API
+     * */
+    @GetMapping("/apis")
+    public ResponseResult<List<ApiVo>> listApis(@AuthenticationPrincipal CustomUserDetails userDetails){
+        return ResponseResult.success(
+                resourcesService.listApis(
                         userDetails.getUser(),
                         userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList()
                 )

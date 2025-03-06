@@ -4,7 +4,6 @@ import com.SReMake.common.exception.can.ValidationException;
 import com.SReMake.model.system.Resources;
 import com.SReMake.model.system.RoleResourcesDraft;
 import com.SReMake.model.user.Role;
-import com.SReMake.repository.system.CasbinRuleRepository;
 import com.SReMake.repository.system.ResourcesRepository;
 import com.SReMake.repository.system.RoleResourcesRepository;
 import com.SReMake.repository.user.RoleRepository;
@@ -61,9 +60,12 @@ public class RoleResourcesServiceImpl implements RoleResourcesService {
         if (Objects.isNull(role)) {
             throw new ValidationException("role not exist");
         }
+        if (resourcesIds.isEmpty()) {
+            return;
+        }
         List<Resources> resources = resourcesRepository.findByIds(resourcesIds);
         List<Resources> routers = resources.stream().filter(res -> res.type() == Resources.Type.ROUTER).toList();
         enforcer.removeGroupingPolicies(routers.stream().map(router -> List.of(role.name(), router.resources())).toList());
-        roleResourcesRepository.deleteByIds(resources.stream().map(Resources::id).toList());
+        roleResourcesRepository.deleteByRoleIdAndResourceId(role.id(), resources.stream().map(Resources::id).toList());
     }
 }
