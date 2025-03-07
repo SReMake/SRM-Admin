@@ -2,7 +2,6 @@ plugins {
     java
     alias(plugins.plugins.spring.springframework.boot)
     alias(plugins.plugins.spring.dependency.management)
-    alias(plugins.plugins.ksp)
     alias(plugins.plugins.kotlin.spring)
     alias(plugins.plugins.kotlin.jvm)
     id("java-library")
@@ -19,7 +18,6 @@ subprojects {
     apply(plugin = "org.jetbrains.kotlin.plugin.spring")
     apply(plugin = "org.springframework.boot")
     apply(plugin = "io.spring.dependency-management")
-    apply(plugin = "com.google.devtools.ksp")
     kotlin {
         jvmToolchain(17)
     }
@@ -32,11 +30,6 @@ subprojects {
 
 
 allprojects {
-    kotlin {
-        sourceSets.main {
-            kotlin.srcDir("build/generated/ksp/main/kotlin")
-        }
-    }
     tasks.withType<JavaCompile> {
         options.compilerArgs.add("-parameters")
     }

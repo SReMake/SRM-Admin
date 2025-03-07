@@ -31,8 +31,6 @@ dependencies {
     compileOnly(aptAndKsp.jimmer)
     compileOnly(aptAndKsp.lombok)
 
-    ksp(aptAndKsp.jimmer.ksp)
-
     testRuntimeOnly(test.junit.platform.launcher)
     testImplementation(test.spring.boot.starter.test)
     testImplementation(test.spring.security.test)
