@@ -118,7 +118,9 @@ dependencyResolutionManagement {
         create("oss") {
         }
         create("jimmer") {
+//            org.babyfish.jimmer:jimmer-sql-kotlin:0.9.62
             library("sql", "org.babyfish.jimmer", "jimmer-sql").version(jimmerVersion)
+            library("sql-kotlin", "org.babyfish.jimmer", "jimmer-sql-kotlin").version(jimmerVersion)
         }
     }
 }

@@ -3,6 +3,7 @@ package com.SReMake.system.service.impl;
 import com.SReMake.common.exception.can.AuthenticationException;
 import com.SReMake.common.exception.can.ValidationException;
 import com.SReMake.model.system.Resources;
+import com.SReMake.model.system.Type;
 import com.SReMake.model.system.dto.ResourcesInput;
 import com.SReMake.model.user.Role;
 import com.SReMake.model.user.User;
@@ -14,6 +15,9 @@ import com.SReMake.system.service.ResourcesService;
 import com.SReMake.system.vo.ApiVo;
 import com.SReMake.system.vo.ResourcesVo;
 import lombok.extern.slf4j.Slf4j;
+import org.babyfish.jimmer.sql.ast.mutation.AssociatedSaveMode;
+import org.babyfish.jimmer.sql.ast.mutation.DeleteMode;
+import org.babyfish.jimmer.sql.fetcher.Fetcher;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -47,32 +51,32 @@ public class ResourcesServiceImpl implements ResourcesService {
     @Override
     @CacheEvict(value = "resources", allEntries = true)
     public void addResources(ResourcesInput params) {
-        resourcesRepository.insert(params);
+        resourcesRepository.insert(params, AssociatedSaveMode.APPEND, null);
     }
 
     @Override
     @CacheEvict(value = "resources", allEntries = true)
     public void deleteResources(long id) {
 
-        Resources resources = resourcesRepository.findById(id);
+        Resources resources = resourcesRepository.findById(id, (Fetcher<Resources>) null);
         if (Objects.isNull(resources)) {
             return;
         }
 //        校验casbin规则
-        if (resources.type() == Resources.Type.ROUTER && casbinRuleRepository.countMatches(resources.resources()) > 0) {
+        if (resources.getType() == Type.ROUTER && casbinRuleRepository.countMatches(resources.getResources()) > 0) {
             throw new ValidationException("the route is referenced and cannot be deleted");
         }
-        resourcesRepository.deleteById(id);
+        resourcesRepository.deleteById(id, DeleteMode.AUTO);
     }
 
     @Override
     @Cacheable(value = "resources", key = "'resources_'+#user.id()")
     public List<ResourcesVo> listResources(@NotNull User user, List<String> roles) {
-        if (user.username().equals("admin") || roles.contains("administrator")) {
-            return resourcesRepository.findAll().stream().map(ResourcesVo::new).toList();
+        if (user.getUsername().equals("admin") || roles.contains("administrator")) {
+            return resourcesRepository.findAll(null).stream().map(ResourcesVo::new).toList();
         } else {
-            return roleResourcesRepository.listByRole(roleRepository.listByNames(roles).stream().map(Role::id).toList())
-                    .stream().filter(resources -> resources.type() != Resources.Type.ROUTER)
+            return roleResourcesRepository.listByRole(roleRepository.listByNames(roles).stream().map(Role::getId).toList())
+                    .stream().filter(resources -> resources.getType() != Type.ROUTER)
                     .map(ResourcesVo::new)
                     .toList();
         }
@@ -81,7 +85,7 @@ public class ResourcesServiceImpl implements ResourcesService {
 
     @Override
     public List<ApiVo> listApis(@NotNull User user, List<String> roles) {
-        if (user.username().equals("admin") || roles.contains("administrator")) {
+        if (user.getUsername().equals("admin") || roles.contains("administrator")) {
             List<ApiVo> apis = new java.util.ArrayList<>();
             requestMappingHandlerMapping.getHandlerMethods().forEach((method, handler) -> {
                 if (!method.getDirectPaths().isEmpty()) {

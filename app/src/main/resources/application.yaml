@@ -19,6 +19,7 @@ jwt:
   secret-key: your_key # jwt签名加密秘钥
   expireTime: 15552000000 # jwt过期时间毫秒
 jimmer:
+  language: kotlin
   offset-optimizing-threshold: 10
   id-only-target-checking-level: ALL
   database-validation-mode: ERROR

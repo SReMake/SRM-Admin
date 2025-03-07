@@ -37,6 +37,15 @@ allprojects {
             kotlin.srcDir("build/generated/ksp/main/kotlin")
         }
     }
+    ksp {
+
+        sourceSets.main {
+            kotlin.srcDir("src/main/kotlin")
+        }
+        sourceSets.test {
+            kotlin.srcDir("src/test/kotlin")
+        }
+    }
     tasks.withType<JavaCompile> {
         options.compilerArgs.add("-parameters")
     }

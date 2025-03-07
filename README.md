@@ -1,10 +1,11 @@
 # SRM-Admin
 
-清馨的admin框架，轻巧、简单、更少的魔法、更少依赖、升级迁移容易的现代化admin框架后端。
+清馨的admin框架，轻巧、简单、更少的魔法、更少依赖、升级迁移容易的现代化admin框架后端。 kotlin版本暂时未迁移完成
 
 ## 预定的技术选型
 
 - JDK 17
+- Kotlin 2.1
 - Web框架使用spring boot
 - 权限使用Casbin
 - 认证 spring security的jwt

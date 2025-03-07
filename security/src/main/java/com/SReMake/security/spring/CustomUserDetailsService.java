@@ -33,7 +33,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         return new CustomUserDetails() {
             @Override
             public String getUserId() {
-                return user.username();
+                return user.getUsername();
             }
 
             @Override
@@ -43,17 +43,17 @@ public class CustomUserDetailsService implements UserDetailsService {
 
             @Override
             public Collection<? extends GrantedAuthority> getAuthorities() {
-                return enforcer.getRolesForUser(String.valueOf(user.id())).stream().map(SimpleGrantedAuthority::new).toList();
+                return enforcer.getRolesForUser(String.valueOf(user.getId())).stream().map(SimpleGrantedAuthority::new).toList();
             }
 
             @Override
             public String getPassword() {
-                return user.password();
+                return user.getPassword();
             }
 
             @Override
             public String getUsername() {
-                return user.username();
+                return user.getUsername();
             }
         };
 

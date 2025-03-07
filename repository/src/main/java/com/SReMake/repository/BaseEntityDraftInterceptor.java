@@ -25,18 +25,18 @@ public class BaseEntityDraftInterceptor
     public void beforeSave(@NotNull BaseEntityDraft draft, @Nullable BaseEntity original) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (!ImmutableObjects.isLoaded(draft, BaseEntityProps.UPDATE_AT)) {
+        if (!ImmutableObjects.isLoaded(draft, BaseEntityProps.INSTANCE.getUPDATE_AT())) {
             draft.setUpdateAt(LocalDateTime.now());
         }
 
         if (!Objects.isNull(authentication)) {
             CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
             User user = customUserDetails.getUser();
-            if (!ImmutableObjects.isLoaded(draft, BaseEntityProps.UPDATE_BY)) {
-                draft.setUpdateById(user.id());
+            if (!ImmutableObjects.isLoaded(draft, BaseEntityProps.INSTANCE.getUPDATE_BY())) {
+                draft.setUpdateById(user.getId());
             }
-            if (original == null && !ImmutableObjects.isLoaded(draft, BaseEntityProps.CREATE_BY)) {
-                draft.setCreateById(user.id());
+            if (original == null && !ImmutableObjects.isLoaded(draft, BaseEntityProps.INSTANCE.getCREATE_BY())) {
+                draft.setCreateById(user.getId());
             }
         }
 
