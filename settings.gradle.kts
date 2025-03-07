@@ -5,7 +5,7 @@ val urlMaps = mapOf(
     "https://repo.maven.apache.org/maven2" to "https://maven.aliyun.com/repository/public",
     "https://repo1.maven.apache.org/maven2" to "https://mirrors.cloud.tencent.com/nexus/repository/maven-public/",
     "https://dl.google.com/dl/android/maven2" to "https://mirrors.cloud.tencent.com/nexus/repository/maven-public/",
-    "https://plugins.gradle.org/m2" to "https://maven.aliyun.com/repository/gradle-plugin"
+//    "https://plugins.gradle.org/m2" to "https://maven.aliyun.com/repository/gradle-plugin"
 )
 
 fun RepositoryHandler.enableMirror() {
@@ -40,10 +40,15 @@ dependencyResolutionManagement {
     val springBootVersion = "3.4.1"
     val springSecurityVersion = "6.4.2"
     val jimmerVersion = "0.9.55"
+    val kspVersion = "2.1.10-1.0.31"
+    val kotlinVersion = "2.1.10"
     versionCatalogs {
         create("plugins") {
             plugin("spring-springframework-boot", "org.springframework.boot").version(springBootVersion)
             plugin("spring-dependency-management", "io.spring.dependency-management").version("latest.release")
+            plugin("ksp", "com.google.devtools.ksp").version(kspVersion)
+            plugin("kotlin-spring", "org.jetbrains.kotlin.plugin.spring").version(kotlinVersion)
+            plugin("kotlin-jvm", "org.jetbrains.kotlin.jvm").version(kotlinVersion)
         }
         create("development") {
             library("spring-boot-devtools", "org.springframework.boot", "spring-boot-devtools").version(
@@ -78,7 +83,11 @@ dependencyResolutionManagement {
             library("jimmer-spring-boot-starter", "org.babyfish.jimmer", "jimmer-spring-boot-starter").version(
                 jimmerVersion
             )
-            library("spring-boot-starter-data-jdbc","org.springframework.boot","spring-boot-starter-data-jdbc").version(springBootVersion)
+            library(
+                "spring-boot-starter-data-jdbc",
+                "org.springframework.boot",
+                "spring-boot-starter-data-jdbc"
+            ).version(springBootVersion)
 
         }
         create("jdbcDriver") {
@@ -91,7 +100,8 @@ dependencyResolutionManagement {
                 "spring-boot-configuration-processor", "org.springframework.boot", "spring-boot-configuration-processor"
             ).version(springBootVersion)
         }
-        create("apt") {
+        create("aptAndKsp") {
+            library("jimmer-ksp", "org.babyfish.jimmer", "jimmer-ksp").version(jimmerVersion)
             library("lombok", "org.projectlombok", "lombok").version("latest.release")
             library("jimmer", "org.babyfish.jimmer", "jimmer-apt").version(jimmerVersion)
         }
@@ -101,9 +111,9 @@ dependencyResolutionManagement {
             library("jjwt-api", "io.jsonwebtoken", "jjwt-api").version("0.12.6")
 
         }
-        create("casbin"){
-            library("jcasbin","org.casbin","jcasbin").version("1.79.0")
-            library("jdbc-adapter","org.casbin","jdbc-adapter").version("2.10.0")
+        create("casbin") {
+            library("jcasbin", "org.casbin", "jcasbin").version("1.79.0")
+            library("jdbc-adapter", "org.casbin", "jdbc-adapter").version("2.10.0")
         }
         create("oss") {
         }

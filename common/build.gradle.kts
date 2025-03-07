@@ -9,6 +9,6 @@ dependencies {
     implementation(utils.hutool.all)
 
     api(starter.jimmer.spring.boot.starter)
-    annotationProcessor(apt.lombok)
-    compileOnly(apt.lombok)
+    annotationProcessor(aptAndKsp.lombok)
+    compileOnly(aptAndKsp.lombok)
 }

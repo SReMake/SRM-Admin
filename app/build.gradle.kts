@@ -1,8 +1,3 @@
-plugins {
-    alias(plugins.plugins.spring.springframework.boot)
-    alias(plugins.plugins.spring.dependency.management)
-}
-
 group = "com.SReMake"
 version = "0.0.1-SNAPSHOT"
 
@@ -28,21 +23,19 @@ dependencies {
     runtimeOnly(jdbcDriver.h2)
 
     annotationProcessor(spring.spring.boot.configuration.processor)
-    annotationProcessor(apt.lombok)
-    annotationProcessor(apt.jimmer)
+    annotationProcessor(aptAndKsp.lombok)
+    annotationProcessor(aptAndKsp.jimmer)
 
     developmentOnly(development.spring.boot.devtools)
 
-    compileOnly(apt.jimmer)
-    compileOnly(apt.lombok)
+    compileOnly(aptAndKsp.jimmer)
+    compileOnly(aptAndKsp.lombok)
+
+    ksp(aptAndKsp.jimmer.ksp)
 
     testRuntimeOnly(test.junit.platform.launcher)
     testImplementation(test.spring.boot.starter.test)
     testImplementation(test.spring.security.test)
 
 
-}
-
-tasks.test {
-    useJUnitPlatform()
 }

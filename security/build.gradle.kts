@@ -10,6 +10,6 @@ dependencies {
     implementation(starter.spring.boot.starter.data.jdbc)
     implementation(casbin.jcasbin)
     implementation(casbin.jdbc.adapter)
-    annotationProcessor(apt.lombok)
-    compileOnly(apt.lombok)
+    annotationProcessor(aptAndKsp.lombok)
+    compileOnly(aptAndKsp.lombok)
 }

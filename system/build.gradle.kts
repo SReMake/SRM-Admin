@@ -11,8 +11,8 @@ dependencies {
     implementation(starter.spring.boot.starter.data.redis)
     implementation(casbin.jcasbin)
     runtimeOnly(utils.jimmer.client.swagger)
-    annotationProcessor(apt.jimmer)
-    compileOnly(apt.jimmer)
-    annotationProcessor(apt.lombok)
-    compileOnly(apt.lombok)
+    annotationProcessor(aptAndKsp.jimmer)
+    compileOnly(aptAndKsp.jimmer)
+    annotationProcessor(aptAndKsp.lombok)
+    compileOnly(aptAndKsp.lombok)
 }
