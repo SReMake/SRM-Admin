@@ -15,6 +15,21 @@ spring:
     redis:
       time-to-live: 24h
       cache-null-values: false
+  quartz:
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: always
+    auto-startup: true
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: SRMAdminScheduler
+            instanceId: AUTO
+          jobStore:
+            class: org.springframework.scheduling.quartz.LocalDataSourceJobStore
+            isClustered: true
+    wait-for-jobs-to-complete-on-shutdown: true
 jwt:
   secret-key: your_key # jwt签名加密秘钥
   expireTime: 15552000000 # jwt过期时间毫秒
