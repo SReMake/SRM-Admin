@@ -1,6 +1,5 @@
 package com.SReMake.user.service.impl;
 
-import com.SReMake.common.exception.can.RoleException;
 import com.SReMake.common.exception.can.ValidationException;
 import com.SReMake.model.user.Role;
 import com.SReMake.model.user.User;
@@ -58,7 +57,7 @@ public class UserRoleServiceImpl implements UserRoleService {
         ).toList());
 
         if (!enforcerFlag) {
-            throw new RoleException("failed to add a role!");
+            throw new ValidationException("failed to add a role!");
         }
     }
 

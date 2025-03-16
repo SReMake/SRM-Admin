@@ -1,6 +1,6 @@
 package com.SReMake.security.spring;
 
-import lombok.RequiredArgsConstructor;
+import com.SReMake.security.casbin.CasbinFilter;
 import lombok.SneakyThrows;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

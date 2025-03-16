@@ -1,2 +1,2 @@
 # security 模块
-负责casbin配置校验与spring security集成配置
+负责casbin配置校验与spring security集成配置以及全局异常处理

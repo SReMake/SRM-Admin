@@ -4,7 +4,7 @@ import com.SReMake.common.exception.CanThrowException;
 
 public class ValidationException extends RuntimeException implements CanThrowException {
     public ValidationException() {
-        super();
+        super("ValidationException");
     }
 
     public ValidationException(String message) {

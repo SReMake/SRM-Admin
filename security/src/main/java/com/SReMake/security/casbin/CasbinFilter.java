@@ -1,7 +1,8 @@
-package com.SReMake.security.spring;
+package com.SReMake.security.casbin;
 
 import com.SReMake.common.conf.JwtConfig;
 import com.SReMake.common.utils.JwtUtils;
+import com.SReMake.security.spring.SecurityConf;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
