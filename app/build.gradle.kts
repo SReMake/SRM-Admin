@@ -1,6 +1,14 @@
 group = "com.SReMake"
 version = "0.0.1-SNAPSHOT"
 
+plugins {
+    java
+    alias(plugins.plugins.spring.springframework.boot)
+    alias(plugins.plugins.spring.dependency.management)
+    alias(plugins.plugins.kotlin.spring)
+    alias(plugins.plugins.kotlin.jvm)
+    id("java-library")
+}
 
 
 dependencies {
