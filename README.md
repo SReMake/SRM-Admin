@@ -44,6 +44,24 @@
 - [system](./system/README.md)
 - [user](./user/README.md)
 
+## 依赖管理
+
+可以参考这篇blog[在国内如何更优雅的使用Gradle](https://blog.kxxnzstdsw.com/posts/how-to-use-gradle-better/)
+
+## 构建
+
+### jar
+
+``` shell
+gradle --refresh-dependencies && gradle app:bootJar
+```
+
+### docker
+
+```shell
+docker build -t srm-admin .
+```
+
 ## openapi
 
 启动项目后访问这个地址`http://localhost:8080/openapi.html`
