@@ -1,8 +1,5 @@
 plugins {
     java
-    alias(plugins.plugins.spring.springframework.boot)
-    alias(plugins.plugins.spring.dependency.management)
-    alias(plugins.plugins.kotlin.spring)
     alias(plugins.plugins.kotlin.jvm)
     id("java-library")
 }
@@ -15,9 +12,6 @@ subprojects {
     apply(plugin = "java")
     apply(plugin = "java-library")
     apply(plugin = "org.jetbrains.kotlin.jvm")
-    apply(plugin = "org.jetbrains.kotlin.plugin.spring")
-    apply(plugin = "org.springframework.boot")
-    apply(plugin = "io.spring.dependency-management")
     kotlin {
         jvmToolchain(17)
     }
