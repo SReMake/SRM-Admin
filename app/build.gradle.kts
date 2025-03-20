@@ -20,10 +20,6 @@ dependencies {
 
     implementation(starter.spring.boot.starter.web)
     implementation(starter.jimmer.spring.boot.starter)
-//    implementation(starter.spring.boot.starter.data.redis)
-//    implementation(starter.spring.boot.starter.quartz)
-//    implementation(starter.spring.boot.starter.security)
-//    implementation(utils.hutool.all)
 
 
     runtimeOnly(utils.jimmer.client.swagger)

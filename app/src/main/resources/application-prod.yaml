@@ -1,0 +1,55 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://192.168.100.155:5433/postgres
+    username: postgres
+    password: 123456
+  data:
+    redis:
+      host: 192.168.100.155
+      port: 6379
+      password:
+      database: 0
+  cache:
+    type: redis
+    redis:
+      time-to-live: 24h
+      cache-null-values: false
+  quartz:
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: always
+    auto-startup: true
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: SRMAdminScheduler
+            instanceId: AUTO
+          jobStore:
+            class: org.springframework.scheduling.quartz.LocalDataSourceJobStore
+            isClustered: true
+    wait-for-jobs-to-complete-on-shutdown: true
+jwt:
+  secret-key: your_key # jwt签名加密秘钥
+  expireTime: 15552000000 # jwt过期时间毫秒
+jimmer:
+  offset-optimizing-threshold: 10
+  id-only-target-checking-level: ALL
+  database-validation-mode: ERROR
+  show-sql: true
+  pretty-sql: true
+  # You can enable the following configuration line `inline-sql-variables: true`,
+  # restart the application and call some REST APIs again to see what happens
+  inline-sql-variables: true
+  client:
+    openapi:
+      path: /openapi.yml
+      ui-path: /openapi.html
+      properties:
+        info:
+          title: SRM Admin
+          description: 自动生成的api文档
+          version: 1.0
