@@ -30,10 +30,9 @@ public class SpringSecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable);
         http.sessionManagement(conf -> conf.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         // 配置放行路径
-
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers(
-                        SecurityConf.WHITE_LIST.toArray(new String[0])
+                        SecurityConf.whiteListWhitEnv().toArray(new String[0])
                 )
                 .permitAll()
                 .anyRequest().authenticated()

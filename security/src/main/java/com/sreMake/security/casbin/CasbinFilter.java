@@ -19,6 +19,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 public class CasbinFilter extends OncePerRequestFilter {
     private final Enforcer enforcer;
     private final JwtConfig jwtConfig;
+    private final AntPathMatcher matcher = new AntPathMatcher();
 
     public CasbinFilter(Enforcer enforcer, JwtConfig jwtConfig) {
         this.enforcer = enforcer;
@@ -30,7 +31,7 @@ public class CasbinFilter extends OncePerRequestFilter {
     protected void doFilterInternal(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull FilterChain filterChain) {
         String resource = request.getRequestURI();
         for (String pattern : SecurityConf.WHITE_LIST) {
-            if (new AntPathMatcher().match(pattern, resource)) {
+            if (matcher.match(pattern, resource)) {
                 filterChain.doFilter(request, response);
                 return;
             }
