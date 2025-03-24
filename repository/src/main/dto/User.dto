@@ -1,4 +1,4 @@
-export com.SReMake.model.user.User
+export com.sreMake.model.user.User
 
 import java.time.LocalDateTime
 

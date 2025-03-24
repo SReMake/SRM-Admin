@@ -1,6 +1,6 @@
-export com.SReMake.model.system.Resources
+export com.sreMake.model.system.Resources
 
-import com.SReMake.model.system.Resources
+import com.sreMake.model.system.Resources
 
 input ResourcesInput {
     resources
