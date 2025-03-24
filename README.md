@@ -1,6 +1,6 @@
-# SRM-Admin
+# Simple ReMake Admin
 
-清馨的admin框架，轻巧、简单、更少的魔法、更少依赖、升级迁移容易的现代化可使用kotlin的rbac admin框架后端。
+基于较新技术、简单、更少的魔法、更少依赖、升级迁移容易的现代化可使用kotlin的rbac admin框架后端。
 
 ## 预定的技术选型
 
