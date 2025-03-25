@@ -2,14 +2,14 @@ server:
   port: 8080
 spring:
   datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://192.168.100.155:5433/postgres
-    username: postgres
-    password: 123456
+    driver-class-name:
+    url:
+    username:
+    password:
   data:
     redis:
-      host: 192.168.100.155
-      port: 6379
+      host:
+      port:
       password:
       database: 0
   cache:
@@ -53,3 +53,12 @@ jimmer:
           title: SRM Admin
           description: 自动生成的api文档
           version: 1.0
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'prometheus'
+  metrics:
+    tags:
+      application: ${spring.application.name}
+

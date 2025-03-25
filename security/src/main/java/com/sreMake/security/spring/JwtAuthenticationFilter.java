@@ -36,7 +36,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     @NonNull FilterChain filterChain)
             throws ServletException, IOException {
         String resource = request.getRequestURI();
-        for (String pattern : SecurityConf.WHITE_LIST) {
+        for (String pattern : SecurityConf.WHITE_LIST_WHIT_ENV) {
             if (new AntPathMatcher().match(pattern, resource)) {
                 filterChain.doFilter(request, response);
                 return;
