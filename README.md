@@ -48,12 +48,37 @@
 
 可以参考这篇blog[在国内如何更优雅的使用Gradle](https://blog.kxxnzstdsw.com/posts/how-to-use-gradle-better/)
 
+## 统一的异常处理
+
+### 可抛出异常
+
+#### 业务异常
+
+- 业务异实现[BusinessException](common/src/main/java/com/sreMake/common/exception/BusinessException.java)
+-
+
+默认实现业务异常[DefaultBusinessException](common/src/main/java/com/sreMake/common/exception/business/DefaultBusinessException.java)
+
+#### 其他异常
+
+- 如校验错误等
+
+### 不可抛出异常
+
+- 内部异常如sql异常io异常等
+
+## 监控
+
+### prometheus
+
+使用prometheus添加 `http://localhost:8080/actuator/prometheus` 订阅，只有生产环境需要用户认证。
+
 ## 构建
 
 ### jar
 
 ``` shell
-gradle --refresh-dependencies && gradle app:bootJar
+gradle --refresh-dependencies && gradle build
 ```
 
 ### docker
@@ -64,7 +89,7 @@ docker build -t srm-admin .
 
 ## openapi
 
-启动项目后访问这个地址`http://localhost:8080/openapi.html`
+启动项目后访问这个地址 `http://localhost:8080/openapi.html` ，只有非生产环境可以访问。
 
 ## commit
 
