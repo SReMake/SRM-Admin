@@ -17,9 +17,9 @@ dependencies {
     implementation(project(":user"))
     implementation(project(":system"))
     implementation(project(":scheduler"))
-    implementation(platform("io.micrometer:micrometer-bom:1.14.5"))
-    implementation("io.micrometer:micrometer-registry-prometheus")
-    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation(platform(micrometer.bom))
+    implementation(micrometer.registry.prometheus)
+    implementation(starter.spring.boot.starter.actuator)
     implementation(starter.spring.boot.starter.web)
     implementation(starter.jimmer.spring.boot.starter)
 

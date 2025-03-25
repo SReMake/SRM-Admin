@@ -42,6 +42,7 @@ dependencyResolutionManagement {
     val jimmerVersion = "0.9.68"
     val kspVersion = "2.1.10-1.0.31"
     val kotlinVersion = "2.1.10"
+    val micrometerVersion = "1.14.5"
     versionCatalogs {
         create("plugins") {
             plugin("spring-springframework-boot", "org.springframework.boot").version(springBootVersion)
@@ -89,6 +90,10 @@ dependencyResolutionManagement {
                 "spring-boot-starter-data-jdbc"
             ).version(springBootVersion)
 
+            library(
+                "spring-boot-starter-actuator", "org.springframework.boot", "spring-boot-starter-actuator"
+            ).version(springBootVersion)
+
         }
         create("jdbcDriver") {
             library("mysql", "com.mysql", "mysql-connector-j").version("latest.release")
@@ -119,6 +124,14 @@ dependencyResolutionManagement {
         }
         create("jimmer") {
             library("sql", "org.babyfish.jimmer", "jimmer-sql").version(jimmerVersion)
+        }
+        create("micrometer") {
+            library("registry-prometheus", "io.micrometer", "micrometer-registry-prometheus").version(
+                micrometerVersion
+            )
+            library("bom", "io.micrometer", "micrometer-bom").version(
+                micrometerVersion
+            )
         }
     }
 }
