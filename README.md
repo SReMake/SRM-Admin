@@ -20,6 +20,11 @@
     - [ ] 阿里oss
     - [ ] 腾讯cos
     - [ ] 华为obs
+- sms
+    - [ ] 阿里云sms
+    - [ ] 腾讯云sms
+    - [ ] 华为云sms
+- [ ] 电子邮件
 - [ ] 文件系统
     - [ ] nfs
     - [ ] webdev
@@ -55,7 +60,8 @@
 #### 业务异常
 
 - 业务异实现[BusinessException](common/src/main/java/com/sreMake/common/exception/BusinessException.java)
-- 默认实现业务异常[DefaultBusinessException](common/src/main/java/com/sreMake/common/exception/business/DefaultBusinessException.java)
+-
+默认实现业务异常[DefaultBusinessException](common/src/main/java/com/sreMake/common/exception/business/DefaultBusinessException.java)
 
 #### 其他异常
 
