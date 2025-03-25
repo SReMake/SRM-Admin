@@ -11,6 +11,11 @@ public interface AuthService {
     JwtVo login(UserLoginInput loginInput);
 
     /**
+     * 免验证码登入
+     */
+    JwtVo loginWithoutCaptcha(UserLoginInput loginInput);
+
+    /**
      * 获取验证码
      */
     CaptchaVo captcha();

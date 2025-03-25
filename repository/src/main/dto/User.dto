@@ -29,6 +29,6 @@ input UserSearchInput {
 input UserLoginInput {
     username
     password
-    captcha: String
-    captchaId: String
+    captcha: String?
+    captchaId: String?
 }

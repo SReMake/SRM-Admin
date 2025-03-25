@@ -67,6 +67,26 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
+    public JwtVo loginWithoutCaptcha(UserLoginInput loginInput) {
+        User user = userRepository.findByUsername(loginInput.getUsername());
+        if (Objects.isNull(user)) {
+            throw new UsernameNotFoundException("User not found!");
+        }
+        if (!BCrypt.checkpw(loginInput.getPassword(), user.password())) {
+            throw new BadCredentialsException("wrong username or password!");
+        }
+
+        byte[] key = jwtConfig.getSecretKey().getBytes(StandardCharsets.UTF_8);
+        long expire = System.currentTimeMillis() + jwtConfig.getExpireTime();
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("id", user.id());
+        payload.put("expire", expire);
+        payload.put("username", user.username());
+        String token = JWTUtil.createToken(payload, key);
+        return new JwtVo(token, expire);
+    }
+
+    @Override
     public CaptchaVo captcha() {
         ShearCaptcha captcha = CaptchaUtil.createShearCaptcha(200, 100, 4, 4);
         String uuid = UUID.randomUUID().toString();

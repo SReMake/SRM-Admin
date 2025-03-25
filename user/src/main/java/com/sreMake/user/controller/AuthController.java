@@ -31,6 +31,14 @@ public class AuthController {
     }
 
     /**
+     * 免验证码登入
+     */
+    @PostMapping("/loginWithoutCaptcha")
+    public ResponseResult<JwtVo> loginWithoutCaptcha(@RequestBody UserLoginInput user) {
+        return ResponseResult.success(authService.loginWithoutCaptcha(user));
+    }
+
+    /**
      * 获取验证码
      */
     @GetMapping("/captcha")
