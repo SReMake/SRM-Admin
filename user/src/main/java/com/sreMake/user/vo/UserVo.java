@@ -3,7 +3,7 @@ package com.sreMake.user.vo;
 import com.sreMake.model.user.User;
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Data
 public class UserVo {
@@ -12,8 +12,8 @@ public class UserVo {
     private String phone;
     private String avatar;
     private User.Status status;
-    private LocalDateTime createAt;
-    private LocalDateTime updateAt;
+    private OffsetDateTime createAt;
+    private OffsetDateTime updateAt;
     private User createBy;
     private User updateBy;
 

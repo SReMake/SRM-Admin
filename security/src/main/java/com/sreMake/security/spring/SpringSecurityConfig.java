@@ -32,7 +32,7 @@ public class SpringSecurityConfig {
         // 配置放行路径
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers(
-                        SecurityConf.WHITE_LIST_WHIT_ENV.toArray(new String[0])
+                        SecurityConf.getWhiteListWhitEnv().toArray(new String[0])
                 )
                 .permitAll()
                 .anyRequest().authenticated()

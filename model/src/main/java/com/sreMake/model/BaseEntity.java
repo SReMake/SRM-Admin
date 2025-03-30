@@ -4,7 +4,7 @@ import com.sreMake.model.user.User;
 import org.babyfish.jimmer.sql.*;
 import org.jetbrains.annotations.Nullable;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @MappedSuperclass
 public interface BaseEntity {
@@ -14,10 +14,10 @@ public interface BaseEntity {
     long id();
 
 
-    LocalDateTime createAt();
+    OffsetDateTime createAt();
 
     @Nullable
-    LocalDateTime updateAt();
+    OffsetDateTime updateAt();
 
     @Nullable
     @ManyToOne

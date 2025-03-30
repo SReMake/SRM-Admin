@@ -20,7 +20,7 @@ spring:
   quartz:
     job-store-type: jdbc
     jdbc:
-      initialize-schema: always
+      initialize-schema: NEVER
     auto-startup: true
     properties:
       org:
@@ -30,6 +30,7 @@ spring:
             instanceId: AUTO
           jobStore:
             class: org.springframework.scheduling.quartz.LocalDataSourceJobStore
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
             isClustered: true
     wait-for-jobs-to-complete-on-shutdown: true
 jwt:

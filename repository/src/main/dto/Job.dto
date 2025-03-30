@@ -1,0 +1,19 @@
+export com.sreMake.model.scheduler.Job
+
+import java.time.OffsetDateTime
+
+input JobInput {
+    className
+    methodName
+    name
+    cron
+    startTime?
+    endTime
+}
+
+input JobSearchInput {
+    className?
+    methodName?
+    name?
+    cron?
+}

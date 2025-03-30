@@ -4,8 +4,9 @@
 
 ## 预定的技术选型
 
-- JDK 17
-- 框架使用spring boot
+- JDK 17+
+- kotlin 2.0+
+- 框架使用spring boot 3.4
 - 权限使用Casbin
 - 认证基于spring security的jwt
 - orm

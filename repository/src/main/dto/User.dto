@@ -1,6 +1,6 @@
 export com.sreMake.model.user.User
 
-import java.time.LocalDateTime
+import java.time.OffsetDateTime
 
 input UserInput {
     username
@@ -20,10 +20,10 @@ input UserSearchInput {
     username?
     phone
     status?
-    createAtStart: LocalDateTime?
-    updateAtStart: LocalDateTime?
-    createAtEnd: LocalDateTime?
-    updateAtEnd: LocalDateTime?
+    createAtStart: OffsetDateTime?
+    updateAtStart: OffsetDateTime?
+    createAtEnd: OffsetDateTime?
+    updateAtEnd: OffsetDateTime?
 }
 
 input UserLoginInput {

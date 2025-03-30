@@ -13,7 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 @Component
@@ -26,7 +26,7 @@ public class BaseEntityDraftInterceptor
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (!ImmutableObjects.isLoaded(draft, BaseEntityProps.UPDATE_AT)) {
-            draft.setUpdateAt(LocalDateTime.now());
+            draft.setUpdateAt(OffsetDateTime.now());
         }
 
         if (!Objects.isNull(authentication)) {

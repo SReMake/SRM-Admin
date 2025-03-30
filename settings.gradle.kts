@@ -93,6 +93,9 @@ dependencyResolutionManagement {
             library(
                 "spring-boot-starter-actuator", "org.springframework.boot", "spring-boot-starter-actuator"
             ).version(springBootVersion)
+            library(
+                "spring-boot-starter-aop", "org.springframework.boot", "spring-boot-starter-aop"
+            ).version(springBootVersion)
 
         }
         create("jdbcDriver") {

@@ -30,7 +30,7 @@ public class CasbinFilter extends OncePerRequestFilter {
     @SneakyThrows
     protected void doFilterInternal(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull FilterChain filterChain) {
         String resource = request.getRequestURI();
-        for (String pattern : SecurityConf.WHITE_LIST_WHIT_ENV) {
+        for (String pattern : SecurityConf.getWhiteListWhitEnv()) {
             if (matcher.match(pattern, resource)) {
                 filterChain.doFilter(request, response);
                 return;
