@@ -61,8 +61,7 @@
 #### 业务异常
 
 - 业务异实现[BusinessException](common/src/main/java/com/sreMake/common/exception/BusinessException.java)
--
-默认实现业务异常[DefaultBusinessException](common/src/main/java/com/sreMake/common/exception/business/DefaultBusinessException.java)
+- 默认实现业务异常[DefaultBusinessException](common/src/main/java/com/sreMake/common/exception/business/DefaultBusinessException.java)
 
 #### 其他异常
 
