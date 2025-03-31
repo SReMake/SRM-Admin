@@ -11,4 +11,12 @@ public interface JobRepository extends JavaRepository<Job, Long> {
      * 分页查询
      */
     Page<Job> findPage(PageParam pageParam, JobSearchInput params);
+
+    /**
+     * 根据jobName与jobGroup查找job
+     */
+    Job findByJobNameAndJobGroup(String jobName, String jobGroup);
+
+    void deleteByJobGroupAndJobName(String jobGroup, String jobName);
+
 }

@@ -2,7 +2,8 @@ create table srm_job_log
 (
     id           bigserial primary key,
     job_id       bigint                  not null,
-    job_key      varchar(256)            not null,
+    job_group varchar(256) not null,
+    job_name  varchar(256) not null,
     logs         text                    not null,
     create_at    timestamp default now() not null,
     update_at    timestamp,

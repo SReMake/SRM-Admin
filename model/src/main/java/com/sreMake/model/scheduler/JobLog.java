@@ -14,7 +14,9 @@ public interface JobLog extends BaseEntity {
     @Key
     Job job();
 
-    String jobKey();
+    String jobGroup();
+
+    String jobName();
 
     String logs();
 

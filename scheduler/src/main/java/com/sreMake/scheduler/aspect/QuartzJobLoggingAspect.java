@@ -1,5 +1,9 @@
 package com.sreMake.scheduler.aspect;
 
+import com.sreMake.model.scheduler.Job;
+import com.sreMake.model.scheduler.JobLogDraft;
+import com.sreMake.repository.scheduler.JobLogRepository;
+import com.sreMake.repository.scheduler.JobRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -10,10 +14,21 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobKey;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
+
 @Aspect
 @Component
 @Slf4j
 public class QuartzJobLoggingAspect {
+
+    private final JobLogRepository jobLogRepository;
+    private final JobRepository JobRepository;
+
+    public QuartzJobLoggingAspect(JobLogRepository jobLogRepository, JobRepository jobRepository) {
+        this.jobLogRepository = jobLogRepository;
+        JobRepository = jobRepository;
+    }
+
     @Before("execution(* org.quartz.Job+.execute(..))")
     public void logBeforeExecution(JoinPoint joinPoint) {
         JobExecutionContext context = (JobExecutionContext) joinPoint.getArgs()[0];
@@ -21,8 +36,22 @@ public class QuartzJobLoggingAspect {
         String jobName = jobKey.getName();
         String jobGroup = jobKey.getGroup();
         log.info("Job {} in group {} is about to execute", jobName, jobGroup);
-//        jobExecutionLogService.logJobExecution(jobName, jobGroup, "STARTED", "Job started executing");
-//        TODO 记录日志
+
+        Job job = JobRepository.findByJobNameAndJobGroup(jobName, jobGroup);
+        if (job != null) {
+            jobLogRepository.insert(JobLogDraft.$.produce(draft -> {
+                draft.setJobId(job.id());
+                draft.setJobGroup(jobGroup);
+                draft.setJobName(jobName);
+                draft.setLogs("Job " + jobName + " in group " + jobGroup + " is about to execute");
+                if (job.createBy() != null) {
+                    draft.setCreateById(Objects.requireNonNull(job.createBy()).id());
+                }
+                if (job.updateBy() != null) {
+                    draft.setUpdateById(Objects.requireNonNull(job.updateBy()).id());
+                }
+            }));
+        }
     }
 
     @After("execution(* org.quartz.Job+.execute(..))")
@@ -32,8 +61,22 @@ public class QuartzJobLoggingAspect {
         String jobName = jobKey.getName();
         String jobGroup = jobKey.getGroup();
         log.info("Job {} in group {} executed successfully", jobName, jobGroup);
-//        jobExecutionLogService.logJobExecution(jobName, jobGroup, "SUCCESS", "Job executed successfully");
-//        TODO 记录日志
+        Job job = JobRepository.findByJobNameAndJobGroup(jobName, jobGroup);
+
+        if (job != null) {
+            jobLogRepository.insert(JobLogDraft.$.produce(draft -> {
+                draft.setJobId(job.id());
+                draft.setJobGroup(jobGroup);
+                draft.setJobName(jobName);
+                draft.setLogs("Job " + jobName + " in group " + jobGroup + " is about to execute");
+                if (job.createBy() != null) {
+                    draft.setCreateById(Objects.requireNonNull(job.createBy()).id());
+                }
+                if (job.updateBy() != null) {
+                    draft.setUpdateById(Objects.requireNonNull(job.updateBy()).id());
+                }
+            }));
+        }
     }
 
     @AfterThrowing(pointcut = "execution(* org.quartz.Job+.execute(..))", throwing = "exception")
@@ -43,6 +86,21 @@ public class QuartzJobLoggingAspect {
         String jobName = jobKey.getName();
         String jobGroup = jobKey.getGroup();
         log.error("Job {} in group {} threw an exception", jobName, jobGroup, exception);
-//        TODO 记录日志
+        Job job = JobRepository.findByJobNameAndJobGroup(jobName, jobGroup);
+
+        if (job != null) {
+            jobLogRepository.insert(JobLogDraft.$.produce(draft -> {
+                draft.setJobId(job.id());
+                draft.setJobGroup(jobGroup);
+                draft.setJobName(jobName);
+                draft.setLogs("Job " + jobName + " in group " + jobGroup + " is about to execute");
+                if (job.createBy() != null) {
+                    draft.setCreateById(Objects.requireNonNull(job.createBy()).id());
+                }
+                if (job.updateBy() != null) {
+                    draft.setUpdateById(Objects.requireNonNull(job.updateBy()).id());
+                }
+            }));
+        }
     }
 }

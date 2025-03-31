@@ -20,7 +20,7 @@ spring:
   quartz:
     job-store-type: jdbc
     jdbc:
-      initialize-schema: NEVER
+      initialize-schema: ALWAYS
     auto-startup: true
     properties:
       org:

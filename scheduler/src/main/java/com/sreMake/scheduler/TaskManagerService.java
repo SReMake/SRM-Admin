@@ -5,9 +5,12 @@ import com.sreMake.common.exception.can.ValidationException;
 import com.sreMake.common.result.ResponseResult;
 import com.sreMake.model.scheduler.Job;
 import com.sreMake.model.scheduler.JobDraft;
+import com.sreMake.model.scheduler.JobLog;
 import com.sreMake.model.scheduler.dto.JobInput;
 import com.sreMake.model.scheduler.dto.JobSearchInput;
+import com.sreMake.repository.scheduler.JobLogRepository;
 import com.sreMake.repository.scheduler.JobRepository;
+import com.sreMake.scheduler.vo.JobLogVo;
 import com.sreMake.scheduler.vo.JobVo;
 import org.babyfish.jimmer.Page;
 import org.babyfish.jimmer.client.EnableImplicitApi;
@@ -29,10 +32,12 @@ import java.util.List;
 public class TaskManagerService {
     private final Scheduler scheduler;
     private final JobRepository jobRepository;
+    private final JobLogRepository jobLogRepository;
 
-    public TaskManagerService(Scheduler scheduler, JobRepository jobRepository) {
+    public TaskManagerService(Scheduler scheduler, JobRepository jobRepository, JobLogRepository jobLogRepository) {
         this.scheduler = scheduler;
         this.jobRepository = jobRepository;
+        this.jobLogRepository = jobLogRepository;
     }
 
     @PostMapping("/schedule")
@@ -79,7 +84,6 @@ public class TaskManagerService {
                         draft.setStartTime(jobInput.getStartTime());
                     }
                     draft.setEndTime(jobInput.getEndTime());
-
                 }
         ));
         scheduler.scheduleJob(job, trigger.build());
@@ -87,12 +91,13 @@ public class TaskManagerService {
     }
 
     @DeleteMapping("/unschedule/{group}/{name}")
+    @Transactional
     public ResponseResult<String> unscheduleTask(@PathVariable String group, @PathVariable String name) throws SchedulerException {
         JobKey jobKey = new JobKey(name, group);
-        if (scheduler.deleteJob(jobKey)) {
-            return ResponseResult.success("Task unscheduled successfully!");
-        }
-        return ResponseResult.success("Task not found!");
+        scheduler.deleteJob(jobKey);
+        jobRepository.deleteByJobGroupAndJobName(group, name);
+        jobLogRepository.deleteByJobGroupAndJobName(group, name);
+        return ResponseResult.success("OK");
     }
 
 
@@ -102,5 +107,13 @@ public class TaskManagerService {
         Page<Job> result = jobRepository.findPage(pageParam, params);
         List<JobVo> jobs = result.getRows().stream().map(JobVo::new).toList();
         return ResponseResult.success(new Page<>(jobs, result.getTotalRowCount(), result.getTotalPageCount()));
+    }
+
+    @GetMapping("/list/logs/{group}/{name}")
+    public ResponseResult<Page<JobLogVo>> listJobLogs(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size, @PathVariable String group, @PathVariable String name) {
+        PageParam pageParam = PageParam.byNo(page, size);
+        Page<JobLog> result = jobLogRepository.findPage(pageParam, group, name);
+        List<JobLogVo> jobLogVos = result.getRows().stream().map(JobLogVo::new).toList();
+        return ResponseResult.success(new Page<>(jobLogVos, result.getTotalRowCount(), result.getTotalPageCount()));
     }
 }
