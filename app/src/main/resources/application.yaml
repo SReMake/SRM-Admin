@@ -61,4 +61,14 @@ management:
   metrics:
     tags:
       application: ${spring.application.name}
-
+sms:
+  aliyun:
+    accessKeyId:
+    accessKeySecret:
+    endpoint:
+    signName:
+  tencentCloud:
+    secretId:
+    secretKey:
+    appId:
+    signName:

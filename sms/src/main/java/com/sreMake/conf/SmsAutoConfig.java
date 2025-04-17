@@ -23,9 +23,9 @@ public class SmsAutoConfig {
     @Bean
     @SneakyThrows
     public SmsService smsService() {
-        if (aliyun != null) {
+        if (aliyun != null && !aliyun.isEmpty()) {
             return new AliyunSmsServiceImpl(aliyun);
-        } else if (tencentCloud != null) {
+        } else if (tencentCloud != null && !tencentCloud.isEmpty()) {
             return new TencentCloudSmsServiceImpl(tencentCloud);
         }
         throw new RuntimeException("the sms service is not configured");
@@ -37,6 +37,10 @@ public class SmsAutoConfig {
         private String accessKeySecret;
         private String endpoint;
         private String signName;
+
+        public boolean isEmpty() {
+            return accessKeyId == null || accessKeyId.isEmpty() || accessKeySecret == null || accessKeySecret.isEmpty() || endpoint == null || endpoint.isEmpty() || signName == null || signName.isEmpty();
+        }
     }
 
     @Data
@@ -45,5 +49,9 @@ public class SmsAutoConfig {
         private String secretKey;
         private String appId;
         private String signName;
+
+        public boolean isEmpty() {
+            return secretId == null || secretId.isEmpty() || secretKey == null || secretKey.isEmpty() || appId == null || appId.isEmpty() || signName == null || signName.isEmpty();
+        }
     }
 }

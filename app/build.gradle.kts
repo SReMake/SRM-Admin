@@ -17,6 +17,7 @@ dependencies {
     implementation(project(":user"))
     implementation(project(":system"))
     implementation(project(":scheduler"))
+    implementation(project(":sms"))
     implementation(starter.spring.boot.starter.web)
     implementation(starter.jimmer.spring.boot.starter)
 
