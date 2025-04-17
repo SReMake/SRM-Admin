@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
-import java.util.Map;
+import java.util.LinkedHashMap;
 
 @Slf4j
 public class TencentCloudSmsServiceImpl implements SmsService {
@@ -28,7 +28,7 @@ public class TencentCloudSmsServiceImpl implements SmsService {
 
     @Override
     @SneakyThrows
-    public void sendTemplateSms(@NotNull String to, @NotNull String templateCode, Map<String, String> templateParam) {
+    public void sendTemplateSms(@NotNull String to, @NotNull String templateCode, LinkedHashMap<String, String> templateParam) {
         SendSmsRequest req = new SendSmsRequest();
 
         req.setSmsSdkAppId(tencentCloudSmsConfig.getAppId());

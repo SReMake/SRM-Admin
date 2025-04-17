@@ -5,9 +5,9 @@ dependencies {
     implementation(project(":common"))
     implementation(starter.spring.boot.starter.web)
     implementation(utils.hutool.all)
+    implementation(cloudServices.dysmsapi20180501)
+    implementation(cloudServices.tencentcloud.sdk.java.sms)
     annotationProcessor(aptAndKsp.lombok)
     compileOnly(aptAndKsp.lombok)
-    implementation("com.aliyun:dysmsapi20180501:1.0.10")
-    // https://mvnrepository.com/artifact/com.tencentcloudapi/tencentcloud-sdk-java-sms
-    implementation("com.tencentcloudapi:tencentcloud-sdk-java-sms:3.1.1179")
+
 }

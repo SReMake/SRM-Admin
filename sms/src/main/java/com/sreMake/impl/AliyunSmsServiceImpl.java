@@ -13,7 +13,7 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Map;
+import java.util.LinkedHashMap;
 
 @Slf4j
 public class AliyunSmsServiceImpl implements SmsService {
@@ -34,7 +34,7 @@ public class AliyunSmsServiceImpl implements SmsService {
 
     @Override
     @SneakyThrows
-    public void sendTemplateSms(@NotNull String to, @NotNull String templateCode, Map<String, String> templateParam) {
+    public void sendTemplateSms(@NotNull String to, @NotNull String templateCode, LinkedHashMap<String, String> templateParam) {
         SendMessageWithTemplateRequest req = new SendMessageWithTemplateRequest()
                 .setTo(to)
                 .setFrom(aliyunSmsConfig.getSignName())

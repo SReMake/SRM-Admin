@@ -136,6 +136,10 @@ dependencyResolutionManagement {
                 micrometerVersion
             )
         }
+        create("cloudServices") {
+            library("dysmsapi20180501", "com.aliyun", "dysmsapi20180501").version("1.0.10")
+            library("tencentcloud-sdk-java-sms", "com.tencentcloudapi", "tencentcloud-sdk-java-sms").version("3.1.1179")
+        }
     }
 }
 include("model")
