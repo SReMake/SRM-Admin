@@ -19,4 +19,4 @@ ENV APP_ENV=${ACTIVE_PROFILE}
 
 EXPOSE 8080
 
-CMD ["java", "-jar", "app.jar" ,"--spring.profiles.active=$APP_ENV"]
+CMD ["java", "-jar", "app.jar" ,"--spring.profiles.active=${APP_ENV}"]
