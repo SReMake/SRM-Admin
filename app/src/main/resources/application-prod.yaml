@@ -54,3 +54,14 @@ jimmer:
           title: SRM Admin
           description: 自动生成的api文档
           version: 1.0
+sms:
+  aliyun:
+    accessKeyId:
+    accessKeySecret:
+    endpoint:
+    signName:
+  tencentCloud:
+    secretId:
+    secretKey:
+    appId:
+    signName:
