@@ -37,10 +37,10 @@ gradle.beforeSettings {
 }
 
 dependencyResolutionManagement {
-    val springBootVersion = "3.4.1"
-    val springSecurityVersion = "6.4.2"
-    val jimmerVersion = "0.9.68"
-    val kspVersion = "2.1.10-1.0.31"
+    val springBootVersion = "3.4.4"
+    val springSecurityVersion = "6.4.4"
+    val jimmerVersion = "0.9.76"
+    val kspVersion = "2.1.20-2.0.0"
     val kotlinVersion = "2.1.10"
     val micrometerVersion = "1.14.5"
     versionCatalogs {
