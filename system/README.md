@@ -23,6 +23,4 @@
     - 数据库备份
     - 数据恢复
 - 系统监控
-    - 服务器性能监控
-    - 应用性能监控
-    - 健康检查
+    - 普罗米修斯订阅地址 `http://localhost:8080/actuator/prometheus` 只有内网可以访问或者自行修改[ActuatorFilter](../security/src/main/java/com/sreMake/security/spring/ActuatorFilter.java)

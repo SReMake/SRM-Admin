@@ -31,7 +31,10 @@ object SecurityConf {
     @JvmStatic
     val whiteListWhitEnv: List<String> = System.getenv("APP_ENV")?.let {
         if (it.equals(AppENV.PROD.name, ignoreCase = true)) {
-            authList
+            mutableListOf<String>().apply {
+                addAll(authList)
+                addAll(actuatorList)
+            }
         } else {
             mutableListOf<String>().apply {
                 addAll(authList)
