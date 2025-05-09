@@ -6,6 +6,7 @@ import com.sreMake.model.system.dto.ResourcesInput;
 import com.sreMake.system.service.ResourcesService;
 import com.sreMake.system.vo.ApiVo;
 import com.sreMake.system.vo.ResourcesVo;
+import org.babyfish.jimmer.client.ApiIgnore;
 import org.babyfish.jimmer.client.EnableImplicitApi;
 import org.babyfish.jimmer.client.meta.Api;
 import org.springframework.security.core.GrantedAuthority;
@@ -47,7 +48,7 @@ public class ResourcesController {
      * 获取资源列表
      */
     @GetMapping("/list")
-    public ResponseResult<List<ResourcesVo>> listResources(@AuthenticationPrincipal CustomUserDetails userDetails) {
+    public ResponseResult<List<ResourcesVo>> listResources(@ApiIgnore @AuthenticationPrincipal CustomUserDetails userDetails) {
 
         return ResponseResult.success(
                 resourcesService.listResources(
@@ -60,7 +61,7 @@ public class ResourcesController {
      * 获取后端框架的全部API
      * */
     @GetMapping("/apis")
-    public ResponseResult<List<ApiVo>> listApis(@AuthenticationPrincipal CustomUserDetails userDetails){
+    public ResponseResult<List<ApiVo>> listApis(@ApiIgnore @AuthenticationPrincipal CustomUserDetails userDetails){
         return ResponseResult.success(
                 resourcesService.listApis(
                         userDetails.getUser(),

@@ -46,6 +46,8 @@ jimmer:
   # restart the application and call some REST APIs again to see what happens
   inline-sql-variables: true
   client:
+    ts:
+      path: /ts.zip
     openapi:
       path: /openapi.yml
       ui-path: /openapi.html

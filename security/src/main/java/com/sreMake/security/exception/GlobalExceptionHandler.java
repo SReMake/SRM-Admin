@@ -7,7 +7,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -17,11 +19,6 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseResult<?> handleException(Exception e, HttpServletResponse response) {
-        // 如果是Spring Security的异常，继续抛出以便自定义处理器处理
-        if (e instanceof AccessDeniedException || e instanceof AuthenticationException) {
-            throw (RuntimeException) e;
-        }
-
         //业务异常
         if (e instanceof BusinessException) {
             return ResponseResult.error(((BusinessException) e).code(), e.getMessage());
@@ -32,6 +29,10 @@ public class GlobalExceptionHandler {
         //可返回异常
         if (e instanceof CanThrowException) {
             return ResponseResult.error(400, e.getMessage());
+        }
+        // 如果是Spring Security的异常，继续抛出以便自定义处理器处理
+        if (e instanceof AccessDeniedException || e instanceof AuthenticationException) {
+            throw (RuntimeException) e;
         }
         //不可返回异常  记录日志
         log.error(e.getMessage(), e);

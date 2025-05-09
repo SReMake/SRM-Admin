@@ -4,6 +4,7 @@ import com.sreMake.common.result.ResponseResult;
 import com.sreMake.model.security.CustomUserDetails;
 import com.sreMake.user.service.UserRoleService;
 import com.sreMake.user.vo.RoleVo;
+import org.babyfish.jimmer.client.ApiIgnore;
 import org.babyfish.jimmer.client.EnableImplicitApi;
 import org.babyfish.jimmer.client.meta.Api;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -44,7 +45,7 @@ public class UserRoleController {
      * 查看当前用户角色
      */
     @GetMapping()
-    public ResponseResult<List<RoleVo>> listUserRole(@AuthenticationPrincipal CustomUserDetails userDetails) {
+    public ResponseResult<List<RoleVo>> listUserRole(@ApiIgnore @AuthenticationPrincipal CustomUserDetails userDetails) {
         return ResponseResult.success(userRoleService.listUserRole(userDetails.getUser()));
     }
 

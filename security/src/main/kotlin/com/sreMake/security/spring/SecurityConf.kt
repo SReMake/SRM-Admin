@@ -25,7 +25,8 @@ object SecurityConf {
     val jimmerOpenapi: List<String> = listOf(
         "/jimmer-client/**",
         "/openapi.html",
-        "/openapi.yml"
+        "/openapi.yml",
+        "/ts.zip"
     )
 
     @JvmStatic

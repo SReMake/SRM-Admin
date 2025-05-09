@@ -5,7 +5,9 @@ import cn.hutool.captcha.ShearCaptcha;
 import cn.hutool.crypto.digest.BCrypt;
 import cn.hutool.jwt.JWTUtil;
 import com.sreMake.common.conf.JwtConfig;
+import com.sreMake.common.exception.can.BadCredentialsException;
 import com.sreMake.common.exception.can.CaptchaValidationException;
+import com.sreMake.common.exception.can.UsernameNotFoundException;
 import com.sreMake.model.user.User;
 import com.sreMake.model.user.dto.UserLoginInput;
 import com.sreMake.repository.user.UserRepository;
@@ -14,8 +16,6 @@ import com.sreMake.user.service.AuthService;
 import com.sreMake.user.vo.CaptchaVo;
 import com.sreMake.user.vo.JwtVo;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
