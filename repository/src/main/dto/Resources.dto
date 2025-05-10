@@ -4,8 +4,7 @@ import com.sreMake.model.system.Resources
 
 input ResourcesInput {
     resources
-
+    name
     action
-
     type
 }

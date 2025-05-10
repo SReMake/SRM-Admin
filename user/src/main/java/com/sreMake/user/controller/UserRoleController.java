@@ -8,6 +8,7 @@ import org.babyfish.jimmer.client.ApiIgnore;
 import org.babyfish.jimmer.client.EnableImplicitApi;
 import org.babyfish.jimmer.client.meta.Api;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,7 +46,9 @@ public class UserRoleController {
      * 查看当前用户角色
      */
     @GetMapping()
-    public ResponseResult<List<RoleVo>> listUserRole(@ApiIgnore @AuthenticationPrincipal CustomUserDetails userDetails) {
+//  由于jimmer 无法兼容修改为该方法  public ResponseResult<List<RoleVo>> listUserRole(@AuthenticationPrincipal CustomUserDetails userDetails) {
+    public ResponseResult<List<RoleVo>> listUserRole() {
+        CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return ResponseResult.success(userRoleService.listUserRole(userDetails.getUser()));
     }
 

@@ -10,6 +10,9 @@ public interface Resources extends BaseEntity {
     String resources();
 
     @Nullable
+    String name();
+
+    @Nullable
     String action();
 
     Type type();
@@ -20,6 +23,7 @@ public interface Resources extends BaseEntity {
     Resources parent();
 
     enum Type {
+        VIEW,
         ROUTER,
         BUTTON,
         MENU
