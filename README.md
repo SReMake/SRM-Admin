@@ -37,7 +37,7 @@
 - 容器
     - docker
 - 远程调用
-    - [ ] GRPC
+    - [x] GRPC
 
 ## 预定基础模块
 
@@ -50,6 +50,7 @@
 - [sms](./sms/README.md)
 - [system](./system/README.md)
 - [user](./user/README.md)
+- [grpc](./grpc/readme.md)
 
 ## 依赖管理
 

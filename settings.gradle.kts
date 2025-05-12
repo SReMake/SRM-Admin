@@ -43,6 +43,10 @@ dependencyResolutionManagement {
     val kspVersion = "2.1.20-2.0.0"
     val kotlinVersion = "2.1.10"
     val micrometerVersion = "1.14.5"
+    val protobufPlugin = "0.9.5"
+    val grpcVersion = "1.72.0"
+    val grpcKotlinVersion = "1.4.3"
+    val protobufVersion = "4.30.2"
     versionCatalogs {
         create("plugins") {
             plugin("spring-springframework-boot", "org.springframework.boot").version(springBootVersion)
@@ -50,6 +54,7 @@ dependencyResolutionManagement {
             plugin("ksp", "com.google.devtools.ksp").version(kspVersion)
             plugin("kotlin-spring", "org.jetbrains.kotlin.plugin.spring").version(kotlinVersion)
             plugin("kotlin-jvm", "org.jetbrains.kotlin.jvm").version(kotlinVersion)
+            plugin("protobuf", "com.google.protobuf").version(protobufPlugin)
         }
         create("development") {
             library("spring-boot-devtools", "org.springframework.boot", "spring-boot-devtools").version(
@@ -140,8 +145,19 @@ dependencyResolutionManagement {
             library("dysmsapi20180501", "com.aliyun", "dysmsapi20180501").version("1.0.10")
             library("tencentcloud-sdk-java-sms", "com.tencentcloudapi", "tencentcloud-sdk-java-sms").version("3.1.1179")
         }
+        create("grpc") {
+            library("grpc-core", "io.grpc", "grpc-core").version(grpcVersion)
+            library("grpc-netty", "io.grpc", "grpc-netty").version(grpcVersion)
+            library("grpc-stub", "io.grpc", "grpc-stub").version(grpcVersion)
+            library("grpc-kotlin-stub", "io.grpc", "grpc-kotlin-stub").version(grpcKotlinVersion)
+            library("grpc-protobuf", "io.grpc", "grpc-protobuf").version(grpcVersion)
+            library("protoc-gen-grpc-kotlin", "io.grpc", "protoc-gen-grpc-kotlin").version(grpcKotlinVersion)
+            library("protobuf-java-util", "com.google.protobuf", "protobuf-java-util").version(protobufVersion)
+            library("protobuf-kotlin", "com.google.protobuf", "protobuf-kotlin").version(protobufVersion)
+        }
     }
 }
+
 include("model")
 include("repository")
 include("user")
@@ -151,3 +167,4 @@ include("scheduler")
 include("common")
 include("security")
 include("sms")
+include("grpc")
