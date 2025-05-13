@@ -17,6 +17,6 @@ COPY --from=build /app/app/src/main/resources ./
 
 ENV APP_ENV=${ACTIVE_PROFILE}
 
-EXPOSE 8080
+EXPOSE 8080,50051
 
 CMD ["java", "-jar", "app.jar" ,"--spring.profiles.active=${APP_ENV}"]
