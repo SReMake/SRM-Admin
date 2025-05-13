@@ -65,3 +65,5 @@ sms:
     secretKey:
     appId:
     signName:
+grpc:
+  port: 50051

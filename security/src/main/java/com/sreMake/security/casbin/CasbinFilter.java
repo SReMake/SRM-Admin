@@ -1,6 +1,6 @@
 package com.sreMake.security.casbin;
 
-import com.sreMake.common.conf.JwtConfig;
+import com.sreMake.common.conf.JwtProperties;
 import com.sreMake.common.utils.JwtUtils;
 import com.sreMake.security.spring.SecurityConf;
 import jakarta.servlet.FilterChain;
@@ -18,12 +18,12 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @Component
 public class CasbinFilter extends OncePerRequestFilter {
     private final Enforcer enforcer;
-    private final JwtConfig jwtConfig;
+    private final JwtProperties jwtProperties;
     private final AntPathMatcher matcher = new AntPathMatcher();
 
-    public CasbinFilter(Enforcer enforcer, JwtConfig jwtConfig) {
+    public CasbinFilter(Enforcer enforcer, JwtProperties jwtProperties) {
         this.enforcer = enforcer;
-        this.jwtConfig = jwtConfig;
+        this.jwtProperties = jwtProperties;
     }
 
     @Override
@@ -38,7 +38,7 @@ public class CasbinFilter extends OncePerRequestFilter {
         }
         String token = JwtUtils.extractTokenFromRequest(request);
 
-        if (token != null && JwtUtils.validateToken(token, jwtConfig.getSecretKey())) {
+        if (token != null && JwtUtils.validateToken(token, jwtProperties.getSecretKey())) {
             String action = request.getMethod();
             String username = JwtUtils.extractUsernameFromToken(token);
 //            是管理员就跳过

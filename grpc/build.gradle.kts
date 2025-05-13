@@ -8,6 +8,8 @@ plugins {
 }
 
 dependencies {
+    implementation(project(":common"))
+
     implementation(starter.spring.boot.starter.web)
     implementation(grpc.grpc.core)
     runtimeOnly(grpc.grpc.netty)

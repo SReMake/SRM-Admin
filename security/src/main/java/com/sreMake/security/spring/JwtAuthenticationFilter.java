@@ -1,6 +1,6 @@
 package com.sreMake.security.spring;
 
-import com.sreMake.common.conf.JwtConfig;
+import com.sreMake.common.conf.JwtProperties;
 import com.sreMake.common.utils.JwtUtils;
 import com.sreMake.model.security.CustomUserDetails;
 import jakarta.servlet.FilterChain;
@@ -23,11 +23,11 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final CustomUserDetailsService customUserDetailsService;
-    private final JwtConfig jwtConfig;
+    private final JwtProperties jwtProperties;
 
-    public JwtAuthenticationFilter(CustomUserDetailsService customUserDetailsService, JwtConfig jwtConfig) {
+    public JwtAuthenticationFilter(CustomUserDetailsService customUserDetailsService, JwtProperties jwtProperties) {
         this.customUserDetailsService = customUserDetailsService;
-        this.jwtConfig = jwtConfig;
+        this.jwtProperties = jwtProperties;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
         String token = JwtUtils.extractTokenFromRequest(request);
 
-        if (token != null && JwtUtils.validateToken(token, jwtConfig.getSecretKey())) {
+        if (token != null && JwtUtils.validateToken(token, jwtProperties.getSecretKey())) {
             String username = JwtUtils.extractUsernameFromToken(token);
 
             CustomUserDetails userDetails = customUserDetailsService.loadUserByUsername(username);

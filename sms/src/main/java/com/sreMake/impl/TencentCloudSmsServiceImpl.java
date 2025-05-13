@@ -2,7 +2,7 @@ package com.sreMake.impl;
 
 import cn.hutool.json.JSONUtil;
 import com.sreMake.SmsService;
-import com.sreMake.conf.SmsAutoConfig;
+import com.sreMake.conf.SmsProperties;
 import com.sreMake.exception.SmsException;
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.sms.v20210111.SmsClient;
@@ -18,9 +18,9 @@ import java.util.LinkedHashMap;
 @Slf4j
 public class TencentCloudSmsServiceImpl implements SmsService {
     private final SmsClient client;
-    private final SmsAutoConfig.TencentCloudSmsConfig tencentCloudSmsConfig;
+    private final SmsProperties.TencentCloudSmsConfig tencentCloudSmsConfig;
 
-    public TencentCloudSmsServiceImpl(SmsAutoConfig.TencentCloudSmsConfig tencentCloudSmsConfig) {
+    public TencentCloudSmsServiceImpl(SmsProperties.TencentCloudSmsConfig tencentCloudSmsConfig) {
         this.tencentCloudSmsConfig = tencentCloudSmsConfig;
         Credential cred = new Credential(tencentCloudSmsConfig.getSecretId(), tencentCloudSmsConfig.getSecretKey());
         client = new SmsClient(cred, "ap-guangzhou");

@@ -4,7 +4,7 @@ import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.ShearCaptcha;
 import cn.hutool.crypto.digest.BCrypt;
 import cn.hutool.jwt.JWTUtil;
-import com.sreMake.common.conf.JwtConfig;
+import com.sreMake.common.conf.JwtProperties;
 import com.sreMake.common.exception.can.BadCredentialsException;
 import com.sreMake.common.exception.can.CaptchaValidationException;
 import com.sreMake.common.exception.can.UsernameNotFoundException;
@@ -31,13 +31,13 @@ import java.util.concurrent.TimeUnit;
 public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
 
-    private final JwtConfig jwtConfig;
+    private final JwtProperties jwtProperties;
 
     private final RedisTemplate<String, Object> redisTemplate;
 
-    public AuthServiceImpl(UserRepository userRepository, JwtConfig jwtConfig, RedisTemplate<String, Object> redisTemplate) {
+    public AuthServiceImpl(UserRepository userRepository, JwtProperties jwtProperties, RedisTemplate<String, Object> redisTemplate) {
         this.userRepository = userRepository;
-        this.jwtConfig = jwtConfig;
+        this.jwtProperties = jwtProperties;
         this.redisTemplate = redisTemplate;
     }
 
@@ -56,8 +56,8 @@ public class AuthServiceImpl implements AuthService {
             throw new BadCredentialsException("wrong username or password!");
         }
 
-        byte[] key = jwtConfig.getSecretKey().getBytes(StandardCharsets.UTF_8);
-        long expire = System.currentTimeMillis() + jwtConfig.getExpireTime();
+        byte[] key = jwtProperties.getSecretKey().getBytes(StandardCharsets.UTF_8);
+        long expire = System.currentTimeMillis() + jwtProperties.getExpireTime();
         Map<String, Object> payload = new HashMap<>();
         payload.put("id", user.id());
         payload.put("expire", expire);
@@ -76,8 +76,8 @@ public class AuthServiceImpl implements AuthService {
             throw new BadCredentialsException("wrong username or password!");
         }
 
-        byte[] key = jwtConfig.getSecretKey().getBytes(StandardCharsets.UTF_8);
-        long expire = System.currentTimeMillis() + jwtConfig.getExpireTime();
+        byte[] key = jwtProperties.getSecretKey().getBytes(StandardCharsets.UTF_8);
+        long expire = System.currentTimeMillis() + jwtProperties.getExpireTime();
         Map<String, Object> payload = new HashMap<>();
         payload.put("id", user.id());
         payload.put("expire", expire);

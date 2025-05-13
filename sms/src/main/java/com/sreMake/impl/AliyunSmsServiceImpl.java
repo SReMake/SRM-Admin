@@ -7,7 +7,7 @@ import com.aliyun.dysmsapi20180501.models.SendMessageWithTemplateRequest;
 import com.aliyun.dysmsapi20180501.models.SendMessageWithTemplateResponse;
 import com.aliyun.teaopenapi.models.Config;
 import com.sreMake.SmsService;
-import com.sreMake.conf.SmsAutoConfig;
+import com.sreMake.conf.SmsProperties;
 import com.sreMake.exception.SmsException;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -18,10 +18,10 @@ import java.util.LinkedHashMap;
 @Slf4j
 public class AliyunSmsServiceImpl implements SmsService {
     private final Client client;
-    private final SmsAutoConfig.AliyunSmsConfig aliyunSmsConfig;
+    private final SmsProperties.AliyunSmsConfig aliyunSmsConfig;
 
     @SneakyThrows
-    public AliyunSmsServiceImpl(SmsAutoConfig.AliyunSmsConfig aliyunSmsConfig) {
+    public AliyunSmsServiceImpl(SmsProperties.AliyunSmsConfig aliyunSmsConfig) {
         this.aliyunSmsConfig = aliyunSmsConfig;
         Config config = new Config()
                 .setAccessKeyId(aliyunSmsConfig.getAccessKeyId())

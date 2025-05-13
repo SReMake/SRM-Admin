@@ -67,3 +67,5 @@ sms:
     secretKey: 312
     appId: 321
     signName: 32131
+grpc:
+  port: 50051
