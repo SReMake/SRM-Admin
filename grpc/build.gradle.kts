@@ -16,21 +16,22 @@ dependencies {
     implementation(grpc.grpc.stub)
     implementation(grpc.grpc.kotlin.stub)
     implementation(grpc.grpc.protobuf)
-    implementation(grpc.protoc.gen.grpc.kotlin)
     implementation(grpc.protobuf.java.util)
     implementation(grpc.protobuf.kotlin)
+    implementation(grpc.protobuf.java)
 }
 
 protobuf {
     protoc {
-        artifact = "com.google.protobuf:protoc:4.27.0"
+        artifact = "${grpc.protoc.lib.get().group}:${grpc.protoc.lib.get().name}:${grpc.protoc.lib.get().version}"
     }
     plugins {
         id("grpc") {
-            artifact = "io.grpc:protoc-gen-grpc-java:1.64.0"
+
+            artifact = "${grpc.protoc.gen.grpc.java.get().group}:${grpc.protoc.gen.grpc.java.get().name}:${grpc.protoc.gen.grpc.java.get().version}"
         }
         id("grpckt") {
-            artifact = "io.grpc:protoc-gen-grpc-kotlin:1.3.0:jdk8@jar"
+            artifact = "${grpc.protoc.gen.grpc.kotlin.get().group}:${grpc.protoc.gen.grpc.kotlin.get().name}:${grpc.protoc.gen.grpc.kotlin.get().version}:jdk8@jar"
         }
     }
     generateProtoTasks {

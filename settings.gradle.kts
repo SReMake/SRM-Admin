@@ -2,7 +2,7 @@ rootProject.name = "SRM-Admin"
 
 
 val urlMaps = mapOf(
-    "https://repo.maven.apache.org/maven2" to "https://maven.aliyun.com/repository/public",
+//    "https://repo.maven.apache.org/maven2" to "https://maven.aliyun.com/repository/public",
     "https://repo1.maven.apache.org/maven2" to "https://mirrors.cloud.tencent.com/nexus/repository/maven-public/",
     "https://dl.google.com/dl/android/maven2" to "https://mirrors.cloud.tencent.com/nexus/repository/maven-public/",
     "https://plugins.gradle.org/m2" to "https://maven.aliyun.com/repository/gradle-plugin"
@@ -46,7 +46,7 @@ dependencyResolutionManagement {
     val protobufPlugin = "0.9.5"
     val grpcVersion = "1.72.0"
     val grpcKotlinVersion = "1.4.3"
-    val protobufVersion = "4.30.2"
+    val protobufVersion = "4.31.0"
     versionCatalogs {
         create("plugins") {
             plugin("spring-springframework-boot", "org.springframework.boot").version(springBootVersion)
@@ -152,8 +152,11 @@ dependencyResolutionManagement {
             library("grpc-kotlin-stub", "io.grpc", "grpc-kotlin-stub").version(grpcKotlinVersion)
             library("grpc-protobuf", "io.grpc", "grpc-protobuf").version(grpcVersion)
             library("protoc-gen-grpc-kotlin", "io.grpc", "protoc-gen-grpc-kotlin").version(grpcKotlinVersion)
+            library("protoc-gen-grpc-java", "io.grpc", "protoc-gen-grpc-java").version(grpcVersion)
             library("protobuf-java-util", "com.google.protobuf", "protobuf-java-util").version(protobufVersion)
             library("protobuf-kotlin", "com.google.protobuf", "protobuf-kotlin").version(protobufVersion)
+            library("protobuf-java", "com.google.protobuf", "protobuf-java").version(protobufVersion)
+            library("protoc-lib", "com.google.protobuf", "protoc").version(protobufVersion)
         }
     }
 }
