@@ -13,11 +13,11 @@ subprojects {
     apply(plugin = "java-library")
     apply(plugin = "org.jetbrains.kotlin.jvm")
     kotlin {
-        jvmToolchain(17)
+        jvmToolchain(21)
     }
     java {
         toolchain {
-            languageVersion = JavaLanguageVersion.of(17)
+            languageVersion = JavaLanguageVersion.of(21)
         }
     }
 }
