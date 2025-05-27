@@ -2,7 +2,7 @@ rootProject.name = "SRM-Admin"
 
 
 val urlMaps = mapOf(
-//    "https://repo.maven.apache.org/maven2" to "https://maven.aliyun.com/repository/public",
+    "https://repo.maven.apache.org/maven2" to "https://maven.aliyun.com/repository/public",
     "https://repo1.maven.apache.org/maven2" to "https://mirrors.cloud.tencent.com/nexus/repository/maven-public/",
     "https://dl.google.com/dl/android/maven2" to "https://mirrors.cloud.tencent.com/nexus/repository/maven-public/",
     "https://plugins.gradle.org/m2" to "https://maven.aliyun.com/repository/gradle-plugin"
@@ -37,12 +37,12 @@ gradle.beforeSettings {
 }
 
 dependencyResolutionManagement {
-    val springBootVersion = "3.4.4"
-    val springSecurityVersion = "6.4.4"
-    val jimmerVersion = "0.9.81"
-    val kspVersion = "2.1.20-2.0.0"
-    val kotlinVersion = "2.1.10"
-    val micrometerVersion = "1.14.5"
+    val springBootVersion = "3.5.0"
+    val springSecurityVersion = "6.5.0"
+    val jimmerVersion = "0.9.89"
+    val kspVersion = "2.1.21-2.0.1"
+    val kotlinVersion = "2.1.21"
+    val micrometerVersion = "1.15.0"
     val protobufPlugin = "0.9.5"
     val grpcVersion = "1.72.0"
     val grpcKotlinVersion = "1.4.3"
