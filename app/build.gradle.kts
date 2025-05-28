@@ -18,6 +18,7 @@ dependencies {
     implementation(project(":system"))
     implementation(project(":scheduler"))
     implementation(project(":grpc"))
+    implementation(starter.logbook.spring.boot.starter)
     implementation(starter.spring.boot.starter.web)
     implementation(starter.jimmer.spring.boot.starter)
 

@@ -101,7 +101,9 @@ dependencyResolutionManagement {
             library(
                 "spring-boot-starter-aop", "org.springframework.boot", "spring-boot-starter-aop"
             ).version(springBootVersion)
-
+            library(
+                "logbook-spring-boot-starter", "org.zalando", "logbook-spring-boot-starter"
+            ).version("3.12.0")
         }
         create("jdbcDriver") {
             library("mysql", "com.mysql", "mysql-connector-j").version("latest.release")

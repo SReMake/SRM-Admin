@@ -67,3 +67,6 @@ sms:
     signName:
 grpc:
   port: 50051
+logbook:
+  format:
+    style: json
