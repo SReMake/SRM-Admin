@@ -1,12 +1,33 @@
 rootProject.name = "SRM-Admin"
 
 
+pluginManagement {
+    repositories {
+        maven("https://maven.aliyun.com/repository/gradle-plugin")
+        gradlePluginPortal()
+        maven("https://maven.aliyun.com/repository/public/")
+        maven("https://maven.aliyun.com/repository/central")
+        mavenLocal()
+        mavenCentral()
+    }
+}
+
 val urlMaps = mapOf(
-    "https://repo.maven.apache.org/maven2" to "https://maven.aliyun.com/repository/public",
-    "https://repo1.maven.apache.org/maven2" to "https://mirrors.cloud.tencent.com/nexus/repository/maven-public/",
-    "https://dl.google.com/dl/android/maven2" to "https://mirrors.cloud.tencent.com/nexus/repository/maven-public/",
+    "https://repo.maven.apache.org/maven2" to "https://maven.aliyun.com/repository/public/",
     "https://plugins.gradle.org/m2" to "https://maven.aliyun.com/repository/gradle-plugin"
 )
+
+gradle.allprojects {
+    buildscript {
+        repositories.enableMirror()
+    }
+    repositories.enableMirror()
+}
+
+gradle.beforeSettings {
+    pluginManagement.repositories.enableMirror()
+    dependencyResolutionManagement.repositories.enableMirror()
+}
 
 fun RepositoryHandler.enableMirror() {
     all {
@@ -19,21 +40,23 @@ fun RepositoryHandler.enableMirror() {
         }
     }
 }
-gradle.allprojects {
+dependencyResolutionManagement {
+    // Use Maven Central as the default repository (where Gradle will download dependencies) in all subprojects.
+    @Suppress("UnstableApiUsage")
     repositories {
-        mavenCentral()
+        maven("https://maven.aliyun.com/repository/public/")
+        maven("https://maven.aliyun.com/repository/central")
         maven("https://maven.aliyun.com/repository/gradle-plugin")
-
+        maven("https//mirrors.cloud.tencent.com/nexus/repository/maven-public/")
+        gradlePluginPortal()
+        mavenLocal()
+        mavenCentral()
     }
-    buildscript {
-        repositories.enableMirror()
-    }
-    repositories.enableMirror()
 }
 
-gradle.beforeSettings {
-    pluginManagement.repositories.enableMirror()
-    dependencyResolutionManagement.repositories.enableMirror()
+plugins {
+    // Use the Foojay Toolchains plugin to automatically download JDKs required by subprojects.
+    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
 
 dependencyResolutionManagement {

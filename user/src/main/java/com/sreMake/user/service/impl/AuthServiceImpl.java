@@ -88,9 +88,9 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public CaptchaVo captcha() {
-        ShearCaptcha captcha = CaptchaUtil.createShearCaptcha(200, 100, 4, 4);
+        ShearCaptcha captcha = CaptchaUtil.createShearCaptcha(400, 150, 4, 4);
         String uuid = UUID.randomUUID().toString();
-        redisTemplate.opsForValue().set(RedisToken.AUTH_CAPTCHA.Generate(uuid), captcha.getCode(), 60, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(RedisToken.AUTH_CAPTCHA.Generate(uuid), captcha.getCode(), 300, TimeUnit.SECONDS);
         return new CaptchaVo(uuid, captcha.getImageBase64Data());
     }
 
