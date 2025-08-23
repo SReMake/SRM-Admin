@@ -12,12 +12,16 @@ public class ResourcesVo {
     private String action;
     private Resources.Type type;
     private Long parentId;
+    private String path;
+    private String name;
 
     public ResourcesVo(Resources resources) {
         this.id = resources.id();
         this.resources = resources.resources();
         this.action = resources.action();
         this.type = resources.type();
-        this.parentId = Objects.isNull(resources.parent()) ? null : resources.parent().id();
+        this.parentId = Objects.isNull(resources.parent()) ? null : Objects.requireNonNull(resources.parent()).id();
+        this.path = resources.path();
+        this.name = resources.name();
     }
 }

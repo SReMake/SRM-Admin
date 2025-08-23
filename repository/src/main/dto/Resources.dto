@@ -7,4 +7,5 @@ input ResourcesInput {
     name
     action
     type
+    path
 }

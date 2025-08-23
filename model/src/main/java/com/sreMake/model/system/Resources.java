@@ -7,7 +7,13 @@ import org.jetbrains.annotations.Nullable;
 @Entity
 @Table(name = "srm_resources")
 public interface Resources extends BaseEntity {
+    /**前端页面文件地址或者后端api接口*/
     String resources();
+    /**
+     * 前端路由地址
+     */
+    @Nullable
+    String path();
 
     @Nullable
     String name();
