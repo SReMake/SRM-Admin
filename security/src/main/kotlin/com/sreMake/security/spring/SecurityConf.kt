@@ -13,7 +13,8 @@ object SecurityConf {
         "/api/v1/auth/login",
         "/api/v1/auth/captcha",
         "/api/v1/auth/logout",
-        "/api/v1/auth/loginWithoutCaptcha"
+        "/api/v1/auth/loginWithoutCaptcha",
+        "/api/v1/resources/list"
     )
 
 

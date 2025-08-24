@@ -3,13 +3,14 @@ package com.sreMake.common.utils;
 import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.JWTUtil;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.util.StringUtils;
 
 import java.nio.charset.StandardCharsets;
 
 public class JwtUtils {
     public static String extractTokenFromRequest(HttpServletRequest request) {
         String authorizationHeader = request.getHeader("Authorization");
-        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+        if (StringUtils.hasText(authorizationHeader) && authorizationHeader.startsWith("Bearer ") && !authorizationHeader.equals("Bearer null")) {
             return authorizationHeader.substring(7);
         }
         return null;

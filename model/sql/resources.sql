@@ -2,7 +2,7 @@ create table srm_resources
 (
     id           bigserial primary key,
     name         varchar(128),
-    resources    varchar(512)            not null,
+    resources    varchar(512),
     path         varchar(512),
     action       varchar(256),
     type         varchar(26)             not null,

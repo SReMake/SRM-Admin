@@ -13,6 +13,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
+import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -35,16 +36,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     @NonNull HttpServletResponse response,
                                     @NonNull FilterChain filterChain)
             throws ServletException, IOException {
-        String resource = request.getRequestURI();
-        for (String pattern : SecurityConf.getWhiteListWhitEnv()) {
-            if (new AntPathMatcher().match(pattern, resource)) {
-                filterChain.doFilter(request, response);
-                return;
-            }
-        }
         String token = JwtUtils.extractTokenFromRequest(request);
 
-        if (token != null && JwtUtils.validateToken(token, jwtProperties.getSecretKey())) {
+        if (StringUtils.hasText(token) && JwtUtils.validateToken(token, jwtProperties.getSecretKey())) {
             String username = JwtUtils.extractUsernameFromToken(token);
 
             CustomUserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
@@ -58,6 +52,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
             filterChain.doFilter(request, response);
         } else {
+            String resource = request.getRequestURI();
+            for (String pattern : SecurityConf.getWhiteListWhitEnv()) {
+                if (new AntPathMatcher().match(pattern, resource)) {
+                    filterChain.doFilter(request, response);
+                    return;
+                }
+            }
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.getWriter().write("Unauthorized");
         }
