@@ -3,9 +3,15 @@ export com.sreMake.model.system.Resources
 import com.sreMake.model.system.Resources
 
 input ResourcesInput {
+    parentId: Long?
+
     resources
+
     name
+
     action
+
     type
+
     path
 }

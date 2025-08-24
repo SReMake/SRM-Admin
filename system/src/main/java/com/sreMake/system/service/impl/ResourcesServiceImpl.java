@@ -3,6 +3,7 @@ package com.sreMake.system.service.impl;
 import com.sreMake.common.exception.can.AuthenticationException;
 import com.sreMake.common.exception.can.ValidationException;
 import com.sreMake.model.system.Resources;
+import com.sreMake.model.system.ResourcesDraft;
 import com.sreMake.model.system.dto.ResourcesInput;
 import com.sreMake.model.user.Role;
 import com.sreMake.model.user.User;
@@ -47,7 +48,14 @@ public class ResourcesServiceImpl implements ResourcesService {
     @Override
     @CacheEvict(value = "resources", allEntries = true)
     public void addResources(ResourcesInput params) {
-        resourcesRepository.insert(params);
+        resourcesRepository.insert(ResourcesDraft.$.produce(draft -> {
+            draft.setParentId(params.getParentId());
+            draft.setResources(params.getResources());
+            draft.setName(params.getName());
+            draft.setAction(params.getAction());
+            draft.setType(params.getType());
+            draft.setPath(params.getPath());
+        }));
     }
 
     @Override
