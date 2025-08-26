@@ -37,7 +37,7 @@ public class UserController {
      * 查看用户列表
      */
     @GetMapping("/list")
-    public ResponseResultPage<UserVo> listUser(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size, @RequestParam(required = false) UserSearchInput params) {
+    public ResponseResultPage<UserVo> listUser(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size, @ModelAttribute() UserSearchInput params) {
         PageParam pageParam = PageParam.byNo(page, size);
         return ResponseResultPage.success(userService.listUser(pageParam, params), pageParam);
     }
