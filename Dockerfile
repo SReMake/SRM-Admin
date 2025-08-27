@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN gradle --refresh-dependencies && gradle build
+RUN gradle --refresh-dependencies --info && gradle build --info
 
 FROM ibm-semeru-runtimes:open-21-jre AS runner
 
