@@ -3,19 +3,19 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://192.168.100.155:5433/postgres
+    url: jdbc:postgresql://100.86.212.63:5432/postgres
     username: postgres
-    password: 123456
+    password: Wete8Vmj7yMEQCwz
   data:
     redis:
-      host: 192.168.100.155
+      host: 100.86.212.63
       port: 6379
       password:
       database: 0
   cache:
     type: redis
     redis:
-      time-to-live: 24h
+      time-to-live: 30d
       cache-null-values: false
   quartz:
     job-store-type: jdbc
@@ -46,6 +46,8 @@ jimmer:
   # restart the application and call some REST APIs again to see what happens
   inline-sql-variables: true
   client:
+    ts:
+      path: /ts.zip
     openapi:
       path: /openapi.yml
       ui-path: /openapi.html
@@ -61,10 +63,10 @@ sms:
     endpoint:
     signName:
   tencentCloud:
-    secretId:
-    secretKey:
-    appId:
-    signName:
+    secretId: 12
+    secretKey: 312
+    appId: 321
+    signName: 32131
 grpc:
   port: 50051
 logbook:
