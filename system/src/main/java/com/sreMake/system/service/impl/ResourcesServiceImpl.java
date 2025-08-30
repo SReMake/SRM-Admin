@@ -74,6 +74,20 @@ public class ResourcesServiceImpl implements ResourcesService {
     }
 
     @Override
+    @CacheEvict(value = "resources", allEntries = true)
+    public void updateResources(long id, ResourcesInput params) {
+        resourcesRepository.update(ResourcesDraft.$.produce(draft -> {
+            draft.setId(id);
+            draft.setParentId(params.getParentId());
+            draft.setResources(params.getResources());
+            draft.setName(params.getName());
+            draft.setAction(params.getAction());
+            draft.setType(params.getType());
+            draft.setPath(params.getPath());
+        }));
+    }
+
+    @Override
     @Cacheable(value = "resources", key = "'resources_'+#user.id()")
     public List<ResourcesVo> listResources(@NotNull User user, List<String> roles) {
         if (user.username().equals("admin") || roles.contains("administrator")) {

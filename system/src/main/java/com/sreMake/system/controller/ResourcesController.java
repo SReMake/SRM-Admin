@@ -46,6 +46,15 @@ public class ResourcesController {
     }
 
     /**
+     * 修改资源
+     */
+    @PutMapping("/{id}")
+    public ResponseResult<String> updateResources(@PathVariable long id, @RequestBody ResourcesInput params) {
+        resourcesService.updateResources(id, params);
+        return ResponseResult.success("OK");
+    }
+
+    /**
      * 获取资源列表
      */
     @GetMapping("/list")
@@ -60,12 +69,14 @@ public class ResourcesController {
                 )
         );
     }
+
     /**
      * 获取后端框架的全部API
-     * */
+     *
+     */
     @GetMapping("/apis")
 //  由于jimmer 无法兼容修改为该方法    public ResponseResult<List<ApiVo>> listApis(@AuthenticationPrincipal CustomUserDetails userDetails){
-    public ResponseResult<List<ApiVo>> listApis(){
+    public ResponseResult<List<ApiVo>> listApis() {
         CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return ResponseResult.success(
                 resourcesService.listApis(

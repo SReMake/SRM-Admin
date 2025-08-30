@@ -20,6 +20,11 @@ public interface ResourcesService {
     void deleteResources(long id);
 
     /**
+     * 修改资源
+     */
+    void updateResources(long id, ResourcesInput params);
+
+    /**
      * 获取资源列表
      */
     List<ResourcesVo> listResources(@NotNull User user, List<String> roles);
