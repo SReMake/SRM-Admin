@@ -4,31 +4,48 @@ import java.time.OffsetDateTime
 
 input UserInput {
     username
+
     password
+
     phone
 }
 
 input UpdateUserInput {
     username?
+
     phone
+
     email
+
     avatar
+
+    roleIds: List<Long>?
 }
 
 input UserSearchInput {
     id?
+
     username?
+
     phone
+
     status?
+
     createAtStart: OffsetDateTime?
+
     updateAtStart: OffsetDateTime?
+
     createAtEnd: OffsetDateTime?
+
     updateAtEnd: OffsetDateTime?
 }
 
 input UserLoginInput {
     username
+
     password
+
     captcha: String?
+
     captchaId: String?
 }

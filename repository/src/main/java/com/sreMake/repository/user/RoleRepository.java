@@ -20,4 +20,6 @@ public interface RoleRepository extends JavaRepository<Role, Long> {
      * 根据角色名查询
      */
     List<Role> listByNames(Collection<String> names);
+
+    Role findByName(String name);
 }

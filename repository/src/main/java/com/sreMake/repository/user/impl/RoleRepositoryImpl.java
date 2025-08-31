@@ -43,4 +43,11 @@ public class RoleRepositoryImpl extends AbstractJavaRepository<Role, Long> imple
                 Tables.ROLE_TABLE.name().in(names)
         ).select(Tables.ROLE_TABLE).fetchOptional().stream().toList();
     }
+
+    @Override
+    public Role findByName(String name) {
+        return this.sql.createQuery(Tables.ROLE_TABLE).where(
+                Tables.ROLE_TABLE.name().eq(name)
+        ).select(Tables.ROLE_TABLE).fetchFirst();
+    }
 }

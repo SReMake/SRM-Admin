@@ -55,9 +55,9 @@ public class RoleServiceImpl implements RoleService {
     public void updateRole(long id, UpdateRoleInput params) {
         roleRepositoryImpl.update(RoleDraft.$.produce(draft -> {
             draft.setId(id);
-            if (!Objects.isNull(params.getName())) {
-                draft.setName(params.getName());
-            }
+//            if (!Objects.isNull(params.getName())) {
+//                draft.setName(params.getName());
+//            }
         }));
     }
 
