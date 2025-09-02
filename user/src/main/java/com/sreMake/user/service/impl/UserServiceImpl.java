@@ -60,14 +60,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(long id, UpdateUserInput params) {
-        User user = userRepository.findById(id);
-
-        if (params.getRoleIds() != null && user != null) {
-            List<String> newRoles = roleRepository.findByIds(new HashSet<>(params.getRoleIds())).stream().map(Role::name).toList();
-            List<String> oldRoles = enforcer.getRolesForUser(user.username());
-            enforcer.updatePermissionForUser(user.username(), oldRoles, newRoles);
-        }
-
         userRepository.update(UserDraft.$.produce(draft -> {
             draft.setId(id);
             if (!Objects.isNull(params.getEmail())) {

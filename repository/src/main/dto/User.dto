@@ -18,8 +18,6 @@ input UpdateUserInput {
     email
 
     avatar
-
-    roleIds: List<Long>?
 }
 
 input UserSearchInput {
