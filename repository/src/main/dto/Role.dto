@@ -2,7 +2,7 @@ export com.sreMake.model.user.Role
 
 import java.time.OffsetDateTime
 
-input UpdateRoleInput{
+input UpdateRoleInput {
     name?
 }
 
@@ -11,11 +11,21 @@ input RoleSearchInput {
 
     name?
 
-    createAtStart :OffsetDateTime?
+    createAtStart: OffsetDateTime?
 
-    updateAtStart :OffsetDateTime?
+    updateAtStart: OffsetDateTime?
 
-    createAtEnd :OffsetDateTime?
+    createAtEnd: OffsetDateTime?
 
-    updateAtEnd :OffsetDateTime?
+    updateAtEnd: OffsetDateTime?
+}
+
+input UserRoleInput {
+    phone: String?
+
+    email: String?
+
+    avatar: String?
+
+    roles: List<Long>?
 }

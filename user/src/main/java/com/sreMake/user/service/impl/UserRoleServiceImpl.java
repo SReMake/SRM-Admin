@@ -3,6 +3,8 @@ package com.sreMake.user.service.impl;
 import com.sreMake.common.exception.can.ValidationException;
 import com.sreMake.model.user.Role;
 import com.sreMake.model.user.User;
+import com.sreMake.model.user.UserDraft;
+import com.sreMake.model.user.dto.UserRoleInput;
 import com.sreMake.repository.user.RoleRepository;
 import com.sreMake.repository.user.UserRepository;
 import com.sreMake.user.service.UserRoleService;
@@ -12,9 +14,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 @Transactional
@@ -36,12 +36,7 @@ public class UserRoleServiceImpl implements UserRoleService {
 
         List<String> rolesForUser = enforcer.getRolesForUser(String.valueOf(userId));
 
-        List<Role> roles = roleRepository.findByIds(
-                        roleIds.stream()
-                                .filter(roleId -> Objects.nonNull(roleId) && !rolesForUser.contains(String.valueOf(roleId)))
-                                .toList())
-                .stream()
-                .filter(Objects::nonNull).toList();
+        List<Role> roles = roleRepository.findByIds(roleIds.stream().filter(roleId -> Objects.nonNull(roleId) && !rolesForUser.contains(String.valueOf(roleId))).toList()).stream().filter(Objects::nonNull).toList();
 
         User user = userRepository.findById(userId);
 
@@ -49,12 +44,7 @@ public class UserRoleServiceImpl implements UserRoleService {
             throw new ValidationException("the user or role does not exist!");
         }
 
-        boolean enforcerFlag = enforcer.addGroupingPolicies(roles.stream().map(role ->
-                Arrays.asList(
-                        user.username(),
-                        role.name()
-                )
-        ).toList());
+        boolean enforcerFlag = enforcer.addGroupingPolicies(roles.stream().map(role -> Arrays.asList(user.username(), role.name())).toList());
 
         if (!enforcerFlag) {
             throw new ValidationException("failed to add a role!");
@@ -72,9 +62,36 @@ public class UserRoleServiceImpl implements UserRoleService {
             return;
         }
         List<String> rolesForUser = enforcer.getRolesForUser(user.username());
-        roles.stream()
-                .filter(role -> Objects.nonNull(role) && rolesForUser.contains(role.name()))
-                .forEach(role -> enforcer.deleteRoleForUser(user.username(), role.name()));
+        roles.stream().filter(role -> Objects.nonNull(role) && rolesForUser.contains(role.name())).forEach(role -> enforcer.deleteRoleForUser(user.username(), role.name()));
+    }
+
+    @Override
+    public void updateUserRoles(long userId, UserRoleInput params) {
+
+        User user = userRepository.findById(userId);
+        if (user == null) {
+            return;
+        }
+        userRepository.update(UserDraft.$.produce(draft -> {
+            draft.setId(userId);
+            if (!Objects.isNull(params.getEmail())) {
+                draft.setEmail(params.getEmail());
+            }
+            if (!Objects.isNull(params.getPhone())) {
+                draft.setPhone(params.getPhone());
+            }
+            if (!Objects.isNull(params.getAvatar())) {
+                draft.setAvatar(params.getAvatar());
+            }
+        }));
+        List<String> oldRoles = enforcer.getRolesForUser(user.username());
+
+        List<String> newRoles = new ArrayList<>();
+        if (params.getRoles() != null) {
+            newRoles.addAll(roleRepository.findByIds(new HashSet<>(params.getRoles())).stream().map(Role::name).toList());
+        }
+        enforcer.updatePermissionForUser(user.username(), oldRoles, newRoles);
+
     }
 
     @Override

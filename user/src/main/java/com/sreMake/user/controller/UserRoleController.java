@@ -2,12 +2,11 @@ package com.sreMake.user.controller;
 
 import com.sreMake.common.result.ResponseResult;
 import com.sreMake.model.security.CustomUserDetails;
+import com.sreMake.model.user.dto.UserRoleInput;
 import com.sreMake.user.service.UserRoleService;
 import com.sreMake.user.vo.RoleVo;
-import org.babyfish.jimmer.client.ApiIgnore;
 import org.babyfish.jimmer.client.EnableImplicitApi;
 import org.babyfish.jimmer.client.meta.Api;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,6 +38,15 @@ public class UserRoleController {
     @DeleteMapping("/{userId}")
     public ResponseResult<String> deleteUserRoles(@PathVariable long userId, @RequestBody List<Long> roleIds) {
         userRoleService.deleteUserRoles(userId, roleIds);
+        return ResponseResult.success("OK");
+    }
+
+    /**
+     * 更新修改用户角色信息
+     */
+    @PutMapping("/{userId}")
+    public ResponseResult<String> updateUserRoles(@PathVariable long userId, @RequestBody UserRoleInput userRoleInput) {
+        userRoleService.updateUserRoles(userId, userRoleInput);
         return ResponseResult.success("OK");
     }
 
